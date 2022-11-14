@@ -13,17 +13,15 @@ public class Two {
           ArrayName[i] = input.nextInt();
           }
           System.out.println("Inserted array elements: ");
+		  int sum = 0;
           for (int i = 0; i < ArrayName.length; i++) {
           System.out.print(ArrayName[i] + " ");
+		  if (ArrayName[i]>0) {
+          sum+=ArrayName[i];
+          }
           }
           System.out.println();
-          int Sum = 0;
-          for (int i = 0; i < ArrayName.length; i++) {
-          if (ArrayName[i]>0) {
-          Sum+=ArrayName[i];
-          }
-          }
-		  System.out.print ("The sum of positive massive elements = " + Sum); 
+		  System.out.print ("The sum of positive massive elements = " + sum); 
 		  input.close();
           } 
 }

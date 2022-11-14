@@ -9,10 +9,10 @@ public class Five {
           System.out.print(Arr[i] + " ");
          }
 		  System.out.println();
-		  int maximum_value = Arr[0];
+		  int minimum_value = Arr[0];
         for (int i = 1; i < Arr.length; i++){
-		  maximum_value = Math.min(maximum_value, Arr[i]);
+		  minimum_value = Math.min(minimum_value, Arr[i]);
          }
-		 System.out.print("Min array value = " + maximum_value + " ");
+		 System.out.print("Min array value = " + minimum_value + " ");
 	}
 }

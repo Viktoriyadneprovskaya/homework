@@ -12,10 +12,6 @@ public class Eight {
           for (int i = 0; i < size; i++) {
           ArrayName[i] = in.nextInt();
           }
-          System.out.print("Inserted array elements:");
-          for (int i = 0; i < size; i++) {
-          System.out.print(ArrayName[i] + " ");
-          }
           System.out.println();
 		  System.out.println("Array elements * 2:");
           for (int i = 0; i < size; i++) {

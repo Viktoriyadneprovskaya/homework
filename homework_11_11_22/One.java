@@ -9,9 +9,11 @@ public class One {
           System.out.print(Arr[i] + " ");
          }
 		  System.out.println();
-          System.out.print("Absolute arr value: \n");
+		  int sum=0;
+          System.out.print("Sum of Absolute arr value: \n");
         for (int i=0; i<Arr.length; i++){
-          System.out.print(Math.abs (Arr[i]) + " ");
+		  sum+= Math.abs (Arr[i]);
          }
+		  System.out.print(sum);
 	}
 }

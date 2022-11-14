@@ -4,7 +4,7 @@ public class Four {
   
     public static void main(String[] args) {
           
-          int Sum = 0;
+          int sum = 0;
           Scanner input = new Scanner(System.in);
           System.out.println("Enter array length: ");
           int size = input.nextInt(); 
@@ -16,10 +16,10 @@ public class Four {
           System.out.println("Inserted array elements pow2:");
           for (int i = 0; i < size; i++) {
           System.out.print (Math.pow(ArrayName[i],2) + " ");
-          Sum+=Math.pow(ArrayName[i],2);
+          sum+=Math.pow(ArrayName[i],2);
           }
 		  System.out.println();
-          System.out.print("The sum of massive elements power2  = " + Sum); 
+          System.out.print("The sum of massive elements power2  = " + sum); 
 		  input.close();
           }	  
           }
