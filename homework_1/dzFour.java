@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class dzFour {
+public class DzFour {
   
     public static void main(String[] args) {
          Date current_date= new Date();
