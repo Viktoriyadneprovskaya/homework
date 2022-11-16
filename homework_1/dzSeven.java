@@ -1,4 +1,4 @@
-public class dzSeven {
+public class DzSeven {
   
     public static void main(String[] args) {
           

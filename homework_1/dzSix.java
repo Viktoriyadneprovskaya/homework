@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class dzSix {
+public class DzSix {
   
     public static void main(String[] args) {
           
