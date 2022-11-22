@@ -9,17 +9,15 @@ public class DzOne {
           Scanner input = new Scanner(System.in);
           System.out.println("Enter array length: ");
           int size = input.nextInt();
-          int[] ArrayName = new int[size];
+          int[] arrayName = new int[size];
+		  int sum =0;
           System.out.println("Insert array elements: ");
-          for (int i = 0; i < ArrayName.length; i++) {
-          ArrayName[i] = input.nextInt();
-          }
-          int sum =0;
-          for (int i = 0; i < ArrayName.length; i++) {
-          sum+=ArrayName[i];
+          for (int i = 0; i < arrayName.length; i++) {
+          arrayName[i] = input.nextInt();
+		  sum+=arrayName[i];
           }
           System.out.println();
-          System.out.print ("Massive elements evarage value = " + sum/ArrayName.length); 
+          System.out.print ("Massive elements evarage value = " + sum/arrayName.length); 
           input.close();
           } 
 }
