@@ -10,14 +10,9 @@ public class Main
         car.getInfoCar();
         System.out.println("Car was turned off. Current status: "+ car.TurnOff() + car.convert());//как убрать этот false?пробовала так car.TurnOff(car.convert()) не получается
         car.carSound();
-        System.out.println("Add speed: "+ car.gasPedal()+ "km/h");
-        //не хватило времени,чтоб подумать как зациклить
-        System.out.println("Low speed: "+ car.stopPedal() + "km/h");
-        System.out.println("Low speed: "+ car.stopPedal() + "km/h");
-        System.out.println("Low speed: "+ car.stopPedal() + "km/h");
-        System.out.println("Low speed: "+ car.stopPedal() + "km/h");
-        System.out.println("Low speed: "+ car.stopPedal() + "km/h");
-        System.out.println("Low speed: "+ car.stopPedal() + "km/h");
-        System.out.println("Low speed: "+ car.stopPedal() + "km/h");
+        System.out.println("Push gas pedal: "+ car.gasPedal()+ "km/h");
+        do {
+            System.out.println("Push break pedal: " + car.stopPedal() + "km/h");
+        }while (car.currentSpeed>0);
     }
 }

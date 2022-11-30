@@ -1,7 +1,7 @@
 public class Sweets {
-    String productComposition;
-    String figureProduct;
-    float productCookingTime;
+    protected String productComposition;
+    protected String figureProduct;
+    protected float productCookingTime;
 
     public Sweets (String productComposition, String figureProduct,float productCookingTime) {
         this.productComposition = productComposition;

@@ -7,6 +7,6 @@ public class Cake extends Flour {
 
     }
     public void Show (){
-        System.out.println("Product composition: " + productComposition + "Cake figure: "+ figureProduct);
+        System.out.println("Cake composition: " + productComposition + "Cake figure: "+ figureProduct);
     }
 }
