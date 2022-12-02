@@ -1,13 +1,17 @@
 public class Triangle {
-    float sideA;
-    float sideB;
-    float sideC;
+    int sideA;
+    int sideB;
+    int sideC;
     float halfPerimeter;
+    boolean isosceles;
 
-    public Triangle (float sideA, float sideB, float sideC){
+    public Triangle (int sideA, int sideB, int sideC){
         this.sideA=sideA;
         this.sideB=sideB;
         this.sideC=sideC;
+        if (!checkPifagor()) {
+            throw new IllegalArgumentException("This triangle is not isosceles");
+        }
     }
 
     public void getSides (){
@@ -16,20 +20,20 @@ public class Triangle {
         System.out.println("Side C= "+ sideC);
     }
     public float getPerimeter() {
-        return sideA+sideB+sideC;
+        return sideA + sideB + sideC;
     }
 
     public double getSquare (){
-        halfPerimeter = (sideA+sideB+sideC)/2;
-        return Math.sqrt(halfPerimeter * (halfPerimeter - sideA) * (halfPerimeter - sideB) * (halfPerimeter - sideC));
+            halfPerimeter = (sideA + sideB + sideC) / 2;
+            return Math.sqrt(halfPerimeter * (halfPerimeter - sideA) * (halfPerimeter - sideB) * (halfPerimeter - sideC));
     }
 
-    public void getPifagor(){
+    public boolean checkPifagor(){
         if (Math.pow(sideC,2) == Math.pow(sideA,2)+Math.pow(sideB,2)) {
-            System.out.println("This triangle is isosceles");
+            return true;
         }
         else{
-            System.out.println("This triangle is not isosceles");
+            return false;
         }
     }
 }

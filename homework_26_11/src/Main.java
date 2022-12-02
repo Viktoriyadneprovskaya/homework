@@ -8,10 +8,10 @@ public class Main {
         Marmalade marmalade =new Marmalade("juice, sugar, pectin", "heart", 9, 20, true);
         Cookie cookie =new Cookie("flour, water, sugar", "square", 3, 90, false);
         System.out.println("Gingerbread figure: " + gingerbread.figureProduct);
-        cake.Show(); //переопределение метода
-        marmalade.Show();
-        cookie.Show();
-        cake.GetTime();
-        marshmallow.GetTime(); //переопределение метода
+        cake.show(); //переопределение метода
+        marmalade.show();
+        cookie.show();
+        cake.getTime();
+        marshmallow.getTime(); //переопределение метода
     }
 }

@@ -3,25 +3,28 @@
  //если стороны заданы не верно вывести сообщение на экран
 
 import java.util.Scanner;
-public class Main
+
+import static java.lang.System.exit;
+
+ public class Main
 {
     public static void main(String[] args) {
-        float sideA;
-        float sideB;
-        float sideC;
+        int sideA;
+        int sideB;
+        int sideC;
         Scanner in = new Scanner(System.in);
         System.out.println("Enter side A volume: ");
-        sideA =  in.nextFloat();
+        sideA =  in.nextInt();
         System.out.println("Enter side B volume: ");
-        sideB = in.nextFloat();
+        sideB = in.nextInt();
         System.out.println("Enter side C volume: ");
-        sideC = in.nextFloat();
+        sideC = in.nextInt();
         Triangle triangle = new Triangle(sideA, sideB, sideC);
 
         triangle.getSides();
         System.out.println("Triangle perimeter = " + triangle.getPerimeter());
         System.out.println("Triangle square = " + triangle.getSquare());
-        triangle.getPifagor();
+        triangle.checkPifagor();
 
     }
 }

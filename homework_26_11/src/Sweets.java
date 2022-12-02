@@ -10,11 +10,11 @@ public class Sweets {
 
     }
 
-    public void Show (){
+    public void show (){
         System.out.println("Product composition: " + productComposition);
     }
 
-    public void GetTime(){
+    public void getTime(){
         System.out.println("Product cooking time: " + productCookingTime);
     }
 }

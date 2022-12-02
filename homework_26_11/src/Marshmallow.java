@@ -8,7 +8,7 @@ public class Marshmallow extends NoFlour {
         this. shelfTime=shelfTime;
     }
 
-    public void GetTime(){
+    public void getTime(){
         System.out.println("Marshmallow cooking time: " + productCookingTime + "\nMarshmallow Shelf time: " + shelfTime);
     }
 }

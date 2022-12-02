@@ -6,7 +6,7 @@ public class Cake extends Flour {
         this.haveFilling= haveFilling;
 
     }
-    public void Show (){
+    public void show (){
         System.out.println("Cake composition: " + productComposition + "Cake figure: "+ figureProduct);
     }
 }

@@ -6,13 +6,23 @@
 public class Main
 {
     public static void main(String[] args) {
-        Car car = new Car(220, 60.0f, "2022", 45000.0f, "Mazda", 60, true);
+        Car car = new Car(220, 60.0f, "2022", 45000.0f, "Mazda", 0, true);
         car.getInfoCar();
-        System.out.println("Car was turned off. Current status: "+ car.TurnOff() + car.convert());//как убрать этот false?пробовала так car.TurnOff(car.convert()) не получается
         car.carSound();
-        System.out.println("Push gas pedal: "+ car.gasPedal()+ "km/h");
-        do {
-            System.out.println("Push break pedal: " + car.stopPedal() + "km/h");
-        }while (car.currentSpeed>0);
+        while (car.currentSpeed<60) {
+            System.out.println("Push gas pedal: "+ car.gasPedal()+ "km/h");
+        }
+
+        while (car.currentSpeed>0) {
+            car.stopPedal();
+
+            if (car.currentSpeed==0) {
+                System.out.println("This car was stopped already");
+            } else {
+                System.out.println("Push break pedal: " + car.currentSpeed + "km/h");
+            }
+        }
+
+        System.out.println("Car was turned off. Current status: "+  car.convert(car.carTurnOff()));
     }
 }

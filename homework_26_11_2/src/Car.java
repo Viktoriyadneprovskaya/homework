@@ -23,7 +23,7 @@ public class Car {
         System.out.println("Max speed: " + maxSpeed + "km/h");
         System.out.println("Fuel amount: " + fuelAmount + "l");
         System.out.println("Car price: " + price + "$");
-        System.out.println("Car ON or OFF: " + convert());
+        System.out.println("Car ON or OFF: " + convert(isEngineStarted));
         System.out.println("Current car speed: " + currentSpeed + "km/h");
 
     }
@@ -33,8 +33,8 @@ public class Car {
     }
 
     //переводит тру в он и фолс в оф
-    public String convert() {
-        if (isEngineStarted) {
+    public String convert(boolean isStarted) {
+        if (isStarted) {
             return "ON";
         } else {
             return "OFF";
@@ -42,7 +42,7 @@ public class Car {
     }
 
     //выключает
-    public boolean TurnOff() {
+    public boolean carTurnOff() {
         isEngineStarted = false;
         return isEngineStarted;
     }
@@ -58,14 +58,8 @@ public class Car {
     }
     //педаль тормоз
 	//хотела проверку if в отдельный метод вывести, но не сообразила как, наверное немного коряво этот метод получился
-    public int stopPedal() {
+    public void stopPedal() {
         currentSpeed = Math.max(currentSpeed - 10, 0);
-        if(currentSpeed == 0) {
-            int stopCar = 0;
-            System.out.println("Car was stopped");
-            return stopCar;
-        } else {
-            return currentSpeed;
-        }
+        //return currentSpeed;
     }
 }

@@ -32,7 +32,7 @@ public class Laptop {
         return isTurnedOn;
     }
 
-    public boolean TurnOnOff() {
+    public boolean carTurnOnOff() {
         boolean currentStatus = getIsTurnedOn();
         return setIsTurnedOn(!currentStatus);
     }
@@ -52,7 +52,7 @@ public class Laptop {
     }
     public void lowButteryAmount (boolean currentStatus) {
         if (butteryAmount <= 0){
-            System.out.println("Your buttery amount is 0. laptop was turned off " + (TurnOnOff()));
+            System.out.println("Your buttery amount is 0. laptop was turned off " + (carTurnOnOff()));
         }
         else if (butteryAmount > 0 && butteryAmount <= 10){
             System.out.println("Low charge buttery.You need to charge your laptop.");
