@@ -4,5 +4,8 @@ out/
 #ignore .idea files
 *.inl
 
+#ignore .idea files
+*.iml
+
 #ignore .class extention
 *.class
