@@ -11,7 +11,5 @@ public class Lion extends Cat {
     public String move(){
        return "Lion is running";
     }
-    public String voice(){
-        return "Lion is roaring";
-    }
+
 }

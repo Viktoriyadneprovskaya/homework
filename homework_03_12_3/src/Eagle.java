@@ -12,7 +12,4 @@ public class Eagle extends Bird{
     public String move(){
         return "Eagle is flying";
     }
-    public String voice(){
-        return "Eagle is singing";
-    }
 }

@@ -1,4 +1,4 @@
-public class Cat extends Animal implements Move{
+public class Cat extends Animal implements Movable {
 
     Cat(String habit,boolean isFly,boolean isMammals){
         super(habit,isFly,isMammals);
@@ -7,9 +7,4 @@ public class Cat extends Animal implements Move{
         return "All cats are running";
     }
 
-    @Override
-    public String voice() {
-
-        return "";
-    }
 }

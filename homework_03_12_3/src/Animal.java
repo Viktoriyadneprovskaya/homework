@@ -10,9 +10,9 @@ public class Animal {
         this.isMammals=isMammals;
     }
    String convert(boolean getConvert){
-        if(getConvert){
+       if(getConvert){
             return "Yes";
-        }
+       }
         else{
           return "No";
         }
