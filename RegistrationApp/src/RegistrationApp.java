@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 //TODO UserService;
 public class RegistrationApp {
@@ -122,7 +124,7 @@ public class RegistrationApp {
                 user.setPhoneNumber(phoneNumber);
                 check = false;
             } else {
-                System.out.println("You entered wrong email, enter correct one again: ");
+                System.out.println("You entered wrong phone number, enter correct one again: ");
             }
         }
     }
@@ -134,7 +136,7 @@ public class RegistrationApp {
 
     //TODO RegEx
     public static boolean validatePassword(String password) {
-        String pat = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{8,}";
+        String pat = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{4,}";
         return (password.matches(pat));
     }
 
@@ -161,4 +163,10 @@ public class RegistrationApp {
     public boolean validatePhoneNumber(String number){
         return number.matches("^[+][0-9]{12}");
     }
+
+    public static void main(String[] args) {
+        RegistrationApp newApp = new RegistrationApp();
+        newApp.runApp();
+    }
 }
+

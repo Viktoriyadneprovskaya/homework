@@ -7,9 +7,9 @@ public class DateValidator {
     int year;
 
     DateValidator(String date) {
-        day = Integer.parseInt(date.substring(1, 2));
-        month = Integer.parseInt(date.substring(4, 2));
-        year = Integer.parseInt(date.substring(6, 4));
+        day = Integer.parseInt(date.substring(0,2));
+        month = Integer.parseInt(date.substring(3,5));
+        year = Integer.parseInt(date.substring(6,10));
     }
 
     public int getYear() {
@@ -36,13 +36,16 @@ public class DateValidator {
             if (year % 4 == 0) {
                 if (year % 100 == 0) {
                     if (year % 400 == 0) {
-                        // Выcokocный гoд
-                        return day <= 29;
+                        // Виcokocный гoд
+                        return (day <= 29);
                     }
-                    // Нeвыcokocный гoд
-                    return day <= 28;
+                    // Нeвиcokocный гoд
+                    return (day <= 28);
                 }
-
+                return (day <= 29);
+            } else {
+            // Нeвыcokocный гoд
+            return (day <= 28);
             }
         }
         return true;
