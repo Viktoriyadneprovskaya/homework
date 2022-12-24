@@ -15,7 +15,4 @@ public class Triangle {
         Perimeter = SideOne + SideTwo + SideThree;
         Square = Math.sqrt(Perimeter/2 * (Perimeter/2 - SideOne) * (Perimeter/2 - SideTwo) * (Perimeter/2 - SideThree));
     }
-
 }
-
-
