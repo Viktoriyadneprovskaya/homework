@@ -1,11 +1,17 @@
-#ignore .idea folder
+# ignore .idea folder
+.idea/
+
+# ignore .idea folder
 out/
 
-#ignore .idea files
-*.inl
-
-#ignore .idea files
+# ignore .idea files
 *.iml
 
-#ignore .class extention
+# ignore .class extention
 *.class
+
+**/.idea
+
+**/out
+
+**/*.iml
