@@ -58,4 +58,4 @@ public class Main {
         System.out.println("Employee increase year salary: " + employeeTwo.new_year_salary(newSalary));
         input.close();
     }
-    }
+}
