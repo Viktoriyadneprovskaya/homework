@@ -1,8 +1,0 @@
-#ignore .idea folder
-out/
-
-#ignore .idea files
-*.inl
-
-#ignore .class extention
-*.class
