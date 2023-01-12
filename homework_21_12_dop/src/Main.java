@@ -16,20 +16,20 @@ public class Main {
         boolean end = str.endsWith("va");
         int strLength = str.length();
         String replStr1 = str.replace("Hello", "Bye");
-        StringMethods strMethods =new StringMethods(str);
+        StringMethods strMethods =new StringMethods();
 
         System.out.println("index char " + index1);
         System.out.println("index many chars " + index2);
         System.out.println("If ends on " + "va" + " " + end);
         System.out.println("String's length is " + strLength);
         System.out.println("Replace " + replStr1);
-        System.out.println("Most repeated element");
-        System.out.println(strMethods.povtor(str1));//это сколько раз, а какой именно элемент
+        System.out.println("Most repeated element:");
+        System.out.println(strMethods.repeat(str1));
         strMethods.validate(strMethods.isPalindrome(checkPalindrome));
         strMethods.validate(strMethods.isPalindrome(checkPalindrome1));
         System.out.println(str1.chars().distinct().count());
-        System.out.println(strMethods.delDublicate(str1));
-        System.out.println(strMethods.delDublicate(str));
+        System.out.println(StringMethods.delDublicate(str1));
+        System.out.println(StringMethods.delDublicate(str));
         }
     }
 

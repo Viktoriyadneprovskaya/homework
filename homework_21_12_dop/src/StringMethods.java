@@ -1,33 +1,8 @@
 import java.util.Arrays;
 
-
 public class StringMethods {
-    String str = "";
-    StringMethods(String str) {
-        this.str = str;
-    }
 
-//    public int povtor(String str) {
-//        int counter = 0;
-//        int counter1 = 0;
-//        int maxCounter = 0;
-//        char[] carray = str.toCharArray();
-//        //char[] carray1 = Arrays.sort(carray);
-//        for (int i = 0; str.length() > i; i++) {
-//            for (int j = i + 1; j < str.length(); j++) {
-//                if (carray[j] == carray[i]) {
-//                    counter++;
-//                    if (counter > maxCounter) {
-//                        maxCounter = counter;
-//                    }
-//                }
-//            }
-//            counter=0;
-//        }
-//        return maxCounter;
-//    }
-
-    public void delChar(String str) {//не работает
+    public void delChar(String str) {
         String s2 = "";
         for (int i = 0; i < str.length(); i++) {
             boolean found = false;
@@ -67,7 +42,7 @@ public class StringMethods {
         }
     }
 
-    public String delDublicate (String s){
+    public static String delDublicate (String s){
         String s2 = "";
         for (int i = 0; i < s.length(); i++) {
             boolean found = false;
@@ -84,7 +59,7 @@ public class StringMethods {
         return s2;
     }
 
-    public String povtor(String str) {
+    public String repeat(String str) {
         String strNoDubl=delDublicate(str);
         int q = strNoDubl.length();
         char[] resSimb = new char[q];
