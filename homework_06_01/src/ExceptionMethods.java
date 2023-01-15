@@ -84,16 +84,12 @@ public class ExceptionMethods {
     }
 
     static void rethrow(String s) throws Exception1,Exception2,Exception3{
-        try {
             if (s.equals("First"))
                 throw new Exception1("First");
             else if (s.equals("Second"))
                 throw new Exception2("Second");
             else if (s.equals("Third"))
                 throw new Exception3("Third");
-        } catch (Exception e) {
-            throw e;
-        }
     }
 }
 
