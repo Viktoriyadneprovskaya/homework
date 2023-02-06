@@ -119,5 +119,6 @@ public class ArrayListImpl<T> {
 //          for (int to = size, i = size = 0; i < to; i++)
 //            clear[i] = null;
         elementData = EMPTY_ELEMENTDATA;
+        size=0;
     }
 }
