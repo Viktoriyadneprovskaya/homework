@@ -2,7 +2,7 @@ import java.util.*;
 
 public class HashSetMethods {
     public static void main(String[] args) {
-        HashSet<String> hashSet = new HashSet<String>();
+        HashSet<String> hashSet = new HashSet<>();
         //Write a Java program to append the specified element to the end of a hash set.
         hashSet.add("White");
         hashSet.add("Blue");
@@ -40,13 +40,11 @@ public class HashSetMethods {
         System.out.println(hashSetOne);
         System.out.println();
         //Write a Java program to convert a hash set to an array.
-        //я сделала так. В решении по другому.
         //Object[] obj =hashSet.toArray();
 //        for (Object o: obj){
 //            System.out.println(o);
 //            }
 //        }
-        //так в решении:
         String[] strArray = new String[hashSet.size()];
         hashSet.toArray(strArray);
         for (String element : strArray) {

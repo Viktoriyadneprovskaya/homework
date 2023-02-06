@@ -12,8 +12,8 @@ public class ArrayListMethods {
         arrayList.add("Blue");
         System.out.println(arrayList);
         //Write a Java program to iterate through all elements in a array list
-        for (Object o:arrayList) {
-            System.out.println(o);
+        for (String str:arrayList) {
+            System.out.println(str);
         }
         //Write a Java program to insert an element into the array list at the first position
         arrayList.add(0,"Orange");

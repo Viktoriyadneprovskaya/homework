@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class HashMapMethods {
     public static void main(String[] args) {
-        Map<Integer,String> hashMap = new HashMap<Integer,String>();
+        Map<Integer,String> hashMap = new HashMap<>();
         //Write a Java program to associate the specified value with the specified key in a HashMap.
         hashMap.put(1,"White");
         hashMap.put(2,"Black");
