@@ -10,8 +10,8 @@ public class LinkedListMethods {
         linkedList.add("Pink");
         linkedList.add("Purple");
         //Write a Java program to iterate through all elements in a linked list
-        for (Object o:linkedList) {
-            System.out.println(o);
+        for (String str:linkedList) {
+            System.out.println(str);
         }
         System.out.println();
         // Write a Java program to iterate through all elements in a linked list starting at the specified position
@@ -24,7 +24,6 @@ public class LinkedListMethods {
         Collections.reverse(linkedList);
         System.out.println(linkedList);
         System.out.println();
-        //Дима, вопрос!
         //в решении задания был другой код, ниже написала Можно делать предыдущим методом? он мне кажется проще
         itr = ((LinkedList<String>) linkedList).descendingIterator();
         while (itr.hasNext()){
@@ -117,8 +116,8 @@ public class LinkedListMethods {
         //можно ли было сделать через Object?
         //Object[] arrayList = linkedList.toArray();
         linkedListOne = new LinkedList<>(linkedListOne);
-        for(Object o: linkedListOne){
-            System.out.println(o);
+        for(String str: linkedListOne){
+            System.out.println(str);
         }
         System.out.println();
         //Write a Java program to compare two linked lists

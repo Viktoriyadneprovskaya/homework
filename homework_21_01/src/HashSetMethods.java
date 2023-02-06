@@ -40,11 +40,6 @@ public class HashSetMethods {
         System.out.println(hashSetOne);
         System.out.println();
         //Write a Java program to convert a hash set to an array.
-        //Object[] obj =hashSet.toArray();
-//        for (Object o: obj){
-//            System.out.println(o);
-//            }
-//        }
         String[] strArray = new String[hashSet.size()];
         hashSet.toArray(strArray);
         for (String element : strArray) {
@@ -64,10 +59,14 @@ public class HashSetMethods {
         System.out.println();
         //Write a Java program to compare two hash set
         HashSet<String> hashSetThree = new HashSet<String>();
+//        for (Object o:hashSetOne){
+//
+//            System.out.println(hashSetThree.add(String.valueOf(hashSetOne.contains(o)))? "No" : "Yes");
+//         }
         for (Object o:hashSetOne){
 
             System.out.println(hashSetThree.add(String.valueOf(hashSetOne.contains(o)))? "No" : "Yes");
-         }
+        }
         System.out.println();
         //Write a Java program to compare two sets and retain elements which are same on both sets.
         System.out.println("First hashset: "+hashSet);
