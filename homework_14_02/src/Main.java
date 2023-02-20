@@ -13,7 +13,6 @@
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -97,16 +96,18 @@ public class Main {
         List<Account> sortedByName = accountUtils.sortListByName(listAccounts);
         sortedByName.forEach(System.out::println);
         System.out.println("#8");
-        List<Account> sortedByCountry =accountUtils.getSortedByCountry(listAccounts);
-        sortedByCountry.forEach(System.out::println);
+        Map<String,List<Account>> accountMap= accountUtils.getSortedByCountry(listAccounts);
+        for(Map.Entry<String,List<Account>> elementList:accountMap.entrySet()){
+            System.out.println("______________________________________________");
+            System.out.println(elementList.getKey());
+            for (Account account:elementList.getValue()){
+                System.out.println(account.firstName + " "+account.lastName+ " :$"+account.getBalance());
+            }
+        }
+        System.out.println();
         System.out.println("#9");
         List<List<Account>> listOfLists = Arrays.asList(listAccounts,listAccounts1,listAccounts2);
-
-
         List<Account> sortedByYear=accountUtils.getListAccountsByYear(listOfLists,30);
         sortedByYear.forEach(System.out::println);
-
-
-
     }
 }

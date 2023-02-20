@@ -33,7 +33,8 @@ public class Account {
     public String getGender() {
         return gender;
     }
-    public Integer getAge(LocalDate currentDate){
+    public Integer getAge(){
+        LocalDate currentDate=LocalDate.now();
         int ddB = this.getBirthday().getDayOfYear();
         int ddC = currentDate.getDayOfYear();
         int i = (ddC - ddB)>=0 ? 0:1;

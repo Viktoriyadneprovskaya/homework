@@ -1,8 +1,7 @@
-import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AccountUtils {
     public void showAccountsByBalance(List<Account> accountsList, Double balance){
@@ -30,7 +29,7 @@ public class AccountUtils {
     }
     public Double getBalanceByLastName(List<Account> listAccounts, String lastName){
         return listAccounts.stream()
-                .filter(us->us.getLastName().equals("Johnson"))
+                .filter(us->us.getLastName().equals(lastName))
                 .mapToDouble(user->(user.getBalance()))
                 .reduce(Double.valueOf(0),(us1, us2)->us1+us2);
     }
@@ -42,15 +41,14 @@ public class AccountUtils {
                         .collect(Collectors.toList());
     }
     public List<Account> getListAccountsByYear(List<List<Account>> listOfListsAccounts, int year){
-        LocalDate localDate = LocalDate.now();
         return listOfListsAccounts.stream()
                 .flatMap(account->account.stream())
-                .filter(account -> account.getAge(localDate)>=year)
+                .filter(account -> account.getAge()>=year)
                 .collect(Collectors.toList());
     }
-    public List<Account> getSortedByCountry(List<Account> listAccounts){
-        return listAccounts.stream()
-                .sorted(Comparator.comparing(account -> account.getCountry()))
-                .toList();
+    public Map<String, List<Account>> getSortedByCountry(List<Account> listAccounts){
+        Map<String,List<Account>> accountMap = listAccounts.stream()
+                .collect(Collectors.groupingBy(Account::getCountry));
+        return accountMap;
     }
 }
