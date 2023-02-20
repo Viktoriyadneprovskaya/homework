@@ -25,60 +25,48 @@ public class LambdaExamples {
         //#2
         System.out.println("#2");
         String s = "Hello Java\n";
-        boolean predicate= checkEmpty().test(s);
         System.out.println("Is a string empty?");
-        System.out.println(predicate? "Yes": "No");
+        System.out.println(checkEmpty().test(s) ? "Yes": "No");
         //#3
         System.out.println("#3");
         System.out.println(biFunctionRepeat().apply(s,5));
         //#4
         System.out.println("#4");
         BigDecimal bd = new BigDecimal(3.14159265359793238462643383279502884197169399375105820974944592307816406286208998628034825);
-        Function <BigDecimal, String> exmpl4 = bigDecimal-> "$"+bigDecimal;
-        System.out.println(retSrt(exmpl4,bd));
+        System.out.println(retSrt().apply(bd));
         //#5
         System.out.println("#5");
+        System.out.println(checkStrLength(5,11).test(s) ? "the string matches the condition": "the string doesn't match the condition");
 
-        Predicate3 <String> predicateLength = (str, minLength, maxLength) -> {return s.length()<maxLength || s.length()>minLength;};
-        //checkLength(s,predicateLength);
-        checkStrLength((Predicate3<String>) predicateLength,s,4,9);
         //#6
         System.out.println("#6");
         System.out.println("Random number:");
         System.out.println(getRandom().getAsInt());
         //#7
         System.out.println("#7");
-        IntUnaryOperator getRandom = intValue -> {
-            return (int) (Math.random()*intValue);
-        };
-        randomInt(getRandom,10);
+        System.out.println(randomInt().applyAsInt(20));
         //#8
         System.out.println("#8");
-        IntUnaryOperator toSquare = intValue -> {
-            return intValue * intValue;
-        };
-        getSquare(toSquare,9);
+        int value =9;
+        System.out.println(value+"*"+value+"="+getSquare().applyAsInt(value));
         //#9
         System.out.println("#9");
-        ToIntFunction<String> lengthOfStr = str -> (int) s.length();
-        getLengthStr(lengthOfStr,s);
+        System.out.println("string length is: "+ getLengthStr().applyAsInt(s));
         //#10
         System.out.println("#10");
-        Consumer<String> printCurrentStr = str -> System.out.println(str);
-        printStrN(printCurrentStr,"The END.",4 );
+//        Consumer<String> printCurrentStr = str -> System.out.println(str);
+        printStrN(4).accept("The END.");
     }
-//    public static String writeJava(Supplier<String> supplier){
-//        return supplier.get();
-//    }
+
+    //#1
     public static Supplier<String> writeJava(){
         return ()->"Java";
     }
-//    public static void checkEmpty(String s, Predicate predicate){
-//        System.out.println(predicate.test(s)? "Yes": "No");
-//    }
+    //#2
     public static Predicate<String> checkEmpty(){
         return s1 -> s1.isEmpty();
     }
+    //#3
     public static BiFunction<String,Integer,String> biFunctionRepeat(){
         return (o, o2) -> {
             StringBuilder stringBuilder=new StringBuilder();
@@ -88,26 +76,37 @@ public class LambdaExamples {
             return stringBuilder.toString();
         };
     }
+    //#4
+    public static Function<BigDecimal, String> retSrt(){
+        return bigDecimal-> "$"+bigDecimal;}
+    //#5
+    public static Predicate<String> checkStrLength(int minLength, int maxLength){
+        return (str) -> {return str.length()<=maxLength && str.length()>=minLength;};
+    }
+    //#6
     public static IntSupplier getRandom (){
-            return ()-> (int) (Math.random()*10);
+    return ()-> (int) (Math.random()*10);
+}
+    //#7
+    public static IntUnaryOperator randomInt(){
+        return (n)->(int) (Math.random()*n);
     }
-    public static String retSrt(Function<BigDecimal, String> function4, BigDecimal bd){return function4.apply(bd);}
-    public static void checkStrLength(Predicate3<String> predicate,String s, int min, int max){
-
-        System.out.println(predicate.test(s,min,max) ? "the string matches the condition": "the string doesn't match the condition");
+    //#8
+    public static IntUnaryOperator getSquare() {
+        return intValue -> {
+            return intValue * intValue;
+        };
     }
-    public static void randomInt(IntUnaryOperator getRand,int value){
-        System.out.println(getRand.applyAsInt(value));
+    //#9
+    public static ToIntFunction<String> getLengthStr(){
+       return str -> (int) str.length();
     }
-    public static void getSquare(IntUnaryOperator toSquare,int value){
-        System.out.println(value+"*"+value+"="+toSquare.applyAsInt(value));
-    }
-    public static void getLengthStr(ToIntFunction<String>lengthOfString,String str){
-        System.out.println("string length is: "+lengthOfString.applyAsInt(str));
-    }
-    public static void printStrN(Consumer<String> printCurrentStr,String str,int q){
-        for (int i=0;i<q;i++){
-            printCurrentStr.accept(str);
-        }
+    //#10
+    public static Consumer<String> printStrN(int q){
+        return (String str) ->{
+            for (int i=0;i<q;i++){
+                System.out.println(str);
+            }
+        };
     }
 }
