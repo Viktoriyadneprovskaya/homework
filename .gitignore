@@ -1,8 +1,14 @@
 #ignore .idea folder
 out/
 
+#ignore .idea folder
+.idea/
+
 #ignore .idea files
-*.inl
+*.iml
 
 #ignore .class extention
 *.class
+
+#ignore maven compile folder
+target/

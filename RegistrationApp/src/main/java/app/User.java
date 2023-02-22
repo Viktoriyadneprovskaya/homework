@@ -1,10 +1,14 @@
+package app;
+
+import java.time.LocalDate;
+
 public class User {
     int id;
     String username;
     String password;
     String lastName;
     String firstName;
-    String date;
+    LocalDate date;
     String email;
     String phoneNumber;
     String address;
@@ -51,11 +55,11 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -83,7 +87,7 @@ public class User {
         this.address = address;
     }
 
-    public boolean isAvailable() {
+    public boolean getIsAvailable() {
         return isAvailable;
     }
 
@@ -93,11 +97,16 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
+        return " User"+id+"\n" +
+                "| username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", date=" + date +
-                '}';
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", isAvailable=" + isAvailable +"|\n";
     }
+
 }
