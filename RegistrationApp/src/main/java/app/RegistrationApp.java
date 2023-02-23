@@ -4,7 +4,10 @@ import app.service.UserService;
 import app.util.UserUtils;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 //ToDo 1.Get a list of all the usernames in the list of Users.//Realised in method: loadUsers
@@ -17,8 +20,8 @@ import java.util.*;
 // and then print sorting each group by their lastName field (ignoring case).//Realised in method: groupUsers
 //Todo 7.Find the User objects in the list that have a firstName field that matches a given regular expression pattern,
 // and return them sorted by their lastName field (ignoring case).
-//8.Find the User object in the list with the earliest date field, and return a Map containing the id as key and birthdate as value of that object.
-//9.Find the User objects in the list that have a date field in the same year as a given date, and then group them by the month of their date field,
+//Todo 8.Find the User object in the list with the earliest date field, and return a Map containing the id as key and birthdate as value of that object.
+//ToDo 9.Find the User objects in the list that have a date field in the same year as a given date, and then group them by the month of their date field,
 // and return a Map where the key is the month and the value is a list of User objects with that month.
 public class RegistrationApp {
 
@@ -76,6 +79,17 @@ public class RegistrationApp {
                 }
                 case 9 -> {
                     System.out.println(userUtils.findByPattern(users,"[a-zA-Z]{3,}[0-9]{2,}"));
+                }
+                case 10 ->{
+                    Map<Integer, LocalDate> mapUser = userUtils.findEarliestDate(users);
+                    System.out.println(mapUser);
+                }
+                case 11->{
+                     LocalDate year = LocalDate.of(1986,01,01);
+                    Map<Month,List<User>> sortedByMonthUsers = userUtils.filterByYearSortByMonth(users,year);
+                    for (Map.Entry<Month,List<User>> userElement:sortedByMonthUsers.entrySet()){
+                        System.out.println(userElement.getKey()+ "\n"+userElement.getValue());
+                    }
                 }
                 case 0 -> {
                     exit = false;

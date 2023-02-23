@@ -2,18 +2,19 @@ package app.util;
 
 import app.User;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserUtils {
     public void fillUserFields(BufferedReader bufferedReader, User user)throws IOException {
@@ -168,6 +169,15 @@ public class UserUtils {
                 .filter(user -> user.getUsername().matches(patternStr))
                 .sorted(Comparator.comparing(User::getLastName))
                 .toList();
+    }
+    public Map<Integer,LocalDate> findEarliestDate(List<User> users){
+        return users.stream().sorted(Comparator.comparing(User::getDate)).findFirst().stream().collect(Collectors.toMap(User::getId,User::getDate));
+    }
+
+    public Map<Month,List<User>> filterByYearSortByMonth(List<User>users, LocalDate year){
+        return users.stream().filter(user -> user.getDate().getYear() == year.getYear()).collect(Collectors.toList())
+                .stream().collect(Collectors.groupingBy(user -> user.getDate().getMonth()));
+
     }
 
 }
