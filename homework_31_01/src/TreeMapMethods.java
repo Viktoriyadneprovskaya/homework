@@ -21,27 +21,17 @@ public class TreeMapMethods {
         System.out.println();
         //2. Write a Java program to copy a Tree Map content to another Tree Map.
         TreeMap<Integer, String> tree_map = new TreeMap<>();
-        tree_map.put(15, "Cup");
-        tree_map.put(16, "Knife");
-        tree_map.put(17, "Spoon");
         map.putAll(tree_map);
         for (Map.Entry<Integer, String> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "=>" + entry.getValue());
         }
         System.out.println();
         //3. Write a Java program to search a key in a Tree Map.
+        System.out.println("#3");
         Integer a = 5;
         Integer b = 10;
-        if (map.containsKey(a)) {
-            System.out.println("Yes, this key exists");
-        } else {
-            System.out.println("No, this key doesn't exist");
-        }
-        if (map.containsKey(b)) {
-            System.out.println("Yes, this key exists");
-        } else {
-            System.out.println("No, this key doesn't exist");
-        }
+        System.out.println(map.containsKey(a)?"Yes, this key exists":"No, this key doesn't exist");
+        System.out.println(map.containsKey(b)?"Yes, this key exists":"No, this key doesn't exist");
         System.out.println();
         //4. Write a Java program to search a value in a Tree Map.
         String str = "White";
@@ -65,7 +55,7 @@ public class TreeMapMethods {
         System.out.println("Tree map after clear" + tree_map);
         System.out.println();
         //7. Write a Java program to sort keys in Tree Map by using comparator.
-        TreeMap<Integer, String> tree_map1 = new TreeMap<Integer, String>(new sort_key());
+        TreeMap<Integer, String> tree_map1 = new TreeMap<Integer, String>(new Sort_key());
         tree_map1.put(85,"Cup");
         tree_map1.put(68, "Table");
         tree_map1.put(25,"Tea");
@@ -150,7 +140,7 @@ public class TreeMapMethods {
         System.out.println(map.ceilingKey(17));
     }
 
-    static class sort_key implements Comparator<Integer> {
+    static class Sort_key implements Comparator<Integer> {
         @Override
         public int compare(Integer int1, Integer int2) {
             return int1.compareTo(int2);
