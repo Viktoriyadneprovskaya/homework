@@ -56,7 +56,7 @@ public class RegistrationApp {
                     System.out.println(userUtils.filterByLastName(users,"S"));
                 }
                 case 4 -> {
-                    System.out.println(userUtils.filterByMail(users,".com"));
+                    System.out.println(userUtils.filterCorrectMailEndingWithString(users,".com"));
                 }
                 case 5 -> {
                     System.out.println(userUtils.showUsersLogins(users));
@@ -85,7 +85,7 @@ public class RegistrationApp {
                     System.out.println(mapUser);
                 }
                 case 11->{
-                     LocalDate year = LocalDate.of(1986,01,01);
+                    LocalDate year = LocalDate.of(1986,01,01);
                     Map<Month,List<User>> sortedByMonthUsers = userUtils.filterByYearSortByMonth(users,year);
                     for (Map.Entry<Month,List<User>> userElement:sortedByMonthUsers.entrySet()){
                         System.out.println(userElement.getKey()+ "\n"+userElement.getValue());
