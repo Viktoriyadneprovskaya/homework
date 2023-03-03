@@ -150,33 +150,42 @@ public class UserUtils {
 
     //task #1
     public List<String> showUsersLogins(List<User> users) {
-        return users.stream().map(user -> user.getUsername()).toList();
+        return users.stream()
+                .map(user -> user.getUsername())
+                .toList();
     }
 
     //task #2
     public List<User> filterByLastName(List<User> users, String S) {
-        return users.stream().filter(user -> user.getLastName().startsWith(S)).toList();
+        return users.stream()
+                .filter(user -> user.getLastName().startsWith(S))
+                .toList();
     }
 
     //task #3
     public List<User> filterCorrectMailEndingWithString(List<User> users, String S) {
-        return users.stream().filter(user -> user.getEmail().endsWith(S)).toList();
+        return users.stream()
+                .filter(user -> user.getEmail().endsWith(S))
+                .toList();
     }
 
     public List<User> showAvailable(List<User> users) {
-        return users.stream().filter(User::getIsAvailable).collect(Collectors.toList());
+        return users.stream()
+                .filter(User::getIsAvailable)
+                .collect(Collectors.toList());
     }
 
     public List<User> showOnlyWithPhone(List<User> users) {
         return users.stream().filter(user -> user.getPhoneNumber() != null)
-                .filter(user -> user.getPhoneNumber() != "").toList();
+                .filter(user -> user.getPhoneNumber() != "")
+                .toList();
     }
 
     public Map<String, List<User>> groupUsers(List<User> users) {
-        Map<String, List<User>> groupedUsers = users.stream().sorted(Comparator.comparing(User::getLastName)
+        return users.stream()
+                .sorted(Comparator.comparing(User::getLastName)
                         .thenComparing(User::getFirstName))
                 .collect(Collectors.groupingBy(User::getLastName));
-        return groupedUsers;
     }
 
     public List<User> findByPattern(List<User> users, String patternStr) {

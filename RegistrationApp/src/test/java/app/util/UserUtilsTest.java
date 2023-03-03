@@ -94,7 +94,7 @@ class UserUtilsTest {
     }
 
     @Test
-    void showUsersLogins() {
+    void correctShowUsersLogins() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username2", "SFirstName1", "Last Name1", "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
@@ -102,13 +102,22 @@ class UserUtilsTest {
         List<String> filterUsers=utils.showUsersLogins(users);
         assertEquals(8,users.size());
         assertEquals(8,filterUsers.size());
-        assertFalse(9==users.size());
+    }
+
+    @Test
+    void incorrectShowUsersLogins() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username2", "SFirstName1", "Last Name1", "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
+        users.add(createUser(112,"username3"+112, "SFirstName1"+112, "Last Name1"+112, "someone1@gmail.com2", LocalDate.of(1900,02,10),true,"+380502456781"));
+        List<String> filterUsers=utils.showUsersLogins(users);
+        assertFalse(users.size() == 9);
         assertNotEquals(9,users.size());
         assertNotEquals(7,filterUsers.size());
     }
 
     @Test
-    void filterByLastName() {
+    void correctFilterByLastName() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username2", "FirstName1", "SLast Name1", "someone1@gmail.com1", LocalDate.of(1900,11,10),true,"+380502456781"));
@@ -116,9 +125,24 @@ class UserUtilsTest {
         List<User> filterUsers=utils.filterByLastName(users,"S");
         assertEquals(8,users.size());
         assertEquals(2,filterUsers.size());
+        assertFalse(filterUsers.isEmpty());
     }
+
     @Test
-    void filterCorrectMailEndingWithString() {
+    void incorrectFilterByLastName() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username2", "FirstName1", "SLast Name1", "someone1@gmail.com1", LocalDate.of(1900,11,10),true,"+380502456781"));
+        users.add(createUser(112,"username3", "FirstName2", "SLast Name2", "someone1@gmail.com2", LocalDate.of(1900,11,10),true,"+380502456781"));
+        List<User> filterUsers=utils.filterByLastName(users,"P");
+        assertNotEquals(0,users.size());
+        assertNotEquals(2,filterUsers.size());
+        assertTrue(filterUsers.isEmpty());
+    }
+
+
+    @Test
+    void correctFilterCorrectMailEndingWithString() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username1"+0, "FirstName1"+0, "Last Name1"+0, "someone1@gmail.com1", LocalDate.of(1900,11,10),true,"+380502456781"));
@@ -130,7 +154,19 @@ class UserUtilsTest {
     }
 
     @Test
-    void showAvailable() {
+    void incorrectFilterCorrectMailEndingWithString() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username1"+0, "FirstName1"+0, "Last Name1"+0, "someone1@gmail.com1", LocalDate.of(1900,11,10),true,"+380502456781"));
+        users.add(createUser(112,"username1"+112, "FirstName1"+112, "Last Name1"+112, "someone1@gmail.com2", LocalDate.of(1900,11,10),true,"+380502456781"));
+        List<User> filterUsers=utils.filterCorrectMailEndingWithString(users,".com1");
+        assertNotEquals(3,users.size());
+        assertNotEquals(12,filterUsers.size());
+        assertFalse(filterUsers.isEmpty());
+    }
+
+    @Test
+    void correctShowAvailable() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username1"+0, "SFirstName1"+0, "Last Name1"+0, "someone1@gmail.com1", LocalDate.of(1900,11,10),false,"+380502456781"));
@@ -139,11 +175,21 @@ class UserUtilsTest {
         assertEquals(8,users.size());
         assertEquals(6,filterUsers.size());
         assertIterableEquals(createUsers(),filterUsers);
-
     }
 
     @Test
-    void showOnlyWithPhone() {
+    void incorrectShowAvailable() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username1"+0, "SFirstName1"+0, "Last Name1"+0, "someone1@gmail.com1", LocalDate.of(1900,11,10),false,"+380502456781"));
+        users.add(createUser(112,"username1"+112, "SFirstName1"+112, "Last Name1"+112, "someone1@gmail.com2", LocalDate.of(1900,11,10),false,"+380502456781"));
+        List<User> filterUsers=utils.showAvailable(users);
+        assertNotEquals(12,users.size());
+        assertNotEquals(1,filterUsers.size());
+    }
+
+    @Test
+    void correctViewOnlyWithPhone() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username1", "SFirstName1", "Last Name1", "someone1@gmail.com1", LocalDate.of(1900,11,10),false,null));
@@ -155,7 +201,18 @@ class UserUtilsTest {
     }
 
     @Test
-    void groupUsers() {
+    void incorrectViewOnlyWithPhone() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username1", "SFirstName1", "Last Name1", "someone1@gmail.com1", LocalDate.of(1900,11,10),false,null));
+        users.add(createUser(112,"username1"+112, "SFirstName1"+112, "Last Name1"+112, "someone1@gmail.com2", LocalDate.of(1900,11,10),false,""));
+        List<User> filterUsers=utils.showOnlyWithPhone(users);
+        assertNotEquals(2,users.size());
+        assertNotEquals(12,filterUsers.size());
+    }
+
+    @Test
+    void correctGroupUsers() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username1"+1, "SFirstName1"+1, "ALast Name1"+1, "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
@@ -163,11 +220,21 @@ class UserUtilsTest {
         Map<String, List<User>> groupUsers = utils.groupUsers(users);
         assertEquals(8,users.size());
         assertThat(groupUsers.size(),is(8));
-
     }
 
     @Test
-    void findByPattern() {
+    void incorrectGroupUsers() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username1"+1, "SFirstName1"+1, "ALast Name1"+1, "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
+        users.add(createUser(112,"username1"+112, "SFirstName1"+112, "Last Name1"+112, "someone1@gmail.com2", LocalDate.of(1900,02,10),true,"+380502456781"));
+        Map<String, List<User>> groupUsers = utils.groupUsers(users);
+        assertNotEquals(12,users.size());
+        assertFalse(groupUsers.size()==1);
+    }
+
+    @Test
+    void correctFindByPattern() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username1", "SFirstName1", "ALast Name1", "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
@@ -177,7 +244,17 @@ class UserUtilsTest {
     }
 
     @Test
-    void findEarliestDate() {
+    void incorrectFindByPattern() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username1", "SFirstName1", "ALast Name1", "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
+        users.add(createUser(112,"username", "SFirstName1", "Last Name1", "someone1@gmail.com2", LocalDate.of(1900,02,10),true,"+380502456781"));
+        List<User> findUsers=utils.findByPattern(users,"[a-z]{1,}[0-9]{8,}");
+        assertNotEquals(6,findUsers.size());
+    }
+
+    @Test
+    void correctFindEarliestDate() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username1"+0, "SFirstName1"+0, "Last Name1"+0+"", "someone1@gmail.com1", LocalDate.of(1900,11,10),true,"+380502456781"));
@@ -188,7 +265,18 @@ class UserUtilsTest {
     }
 
     @Test
-    void filterByYearSortByMonth() {
+    void incorrectFindEarliestDate() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username1"+0, "SFirstName1"+0, "Last Name1"+0+"", "someone1@gmail.com1", LocalDate.of(1900,11,10),true,"+380502456781"));
+        users.add(createUser(112,"username1"+112, "SFirstName1"+112, "Last Name1"+112, "someone1@gmail.com2", LocalDate.of(1901,11,10),true,"+380502456781"));
+        Map<Integer, LocalDate> groupedUsers = utils.findEarliestDate(users);
+        assertFalse(groupedUsers.size()==2);
+        assertNotEquals(groupedUsers, IsMapContaining.hasEntry(111, LocalDate.of(1902,12,12)));
+    }
+
+    @Test
+    void correctFilterByYearSortByMonth() {
         UserUtils utils=new UserUtils();
         List<User> users=createUsers();
         users.add(createUser(111,"username1"+0, "SFirstName1"+0, "Last Name1"+0+"", "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
@@ -204,7 +292,21 @@ class UserUtilsTest {
         testUser.clear();
         testUser.add(users.get(7));
         assertThat(sortedByMonthUsers, IsMapContaining.hasValue(testUser));
-        testUser.clear();
+    }
+
+    @Test
+    void incorrectFilterByYearSortByMonth() {
+        UserUtils utils=new UserUtils();
+        List<User> users=createUsers();
+        users.add(createUser(111,"username1"+0, "SFirstName1"+0, "Last Name1"+0+"", "someone1@gmail.com1", LocalDate.of(1900,01,10),true,"+380502456781"));
+        users.add(createUser(112,"username1"+112, "SFirstName1"+112, "Last Name1"+112, "someone1@gmail.com2", LocalDate.of(1986,02,10),true,"+380502456781"));
+        Map<Month,List<User>> sortedByMonthUsers  = utils.filterByYearSortByMonth(users,LocalDate.of(1986,01,01));
+        assertFalse(sortedByMonthUsers.size()==8);
+        assertFalse(sortedByMonthUsers.equals(IsMapContaining.hasKey(Month.of(3))));
+        List<User> testUser = new ArrayList<>();
+        testUser.add(users.get(4));
+        System.out.println(testUser);
+        assertFalse(sortedByMonthUsers.equals(IsMapContaining.hasValue(testUser)));
         testUser.add(users.get(3));
         assertThat(sortedByMonthUsers, not(IsMapContaining.hasValue(testUser)));
     }
