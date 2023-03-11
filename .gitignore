@@ -1,14 +1,17 @@
-#ignore .idea folder
-out/
-
-#ignore .idea folder
+# ignore .idea folder
 .idea/
 
-#ignore .idea files
+# ignore .idea folder
+out/
+
+# ignore .idea files
 *.iml
 
-#ignore .class extention
+# ignore .class extention
 *.class
 
-#ignore maven compile folder
-target/
+**/.idea
+
+**/out
+
+**/*.iml
