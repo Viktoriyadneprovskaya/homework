@@ -1,0 +1,9 @@
+0,Usr2,Avr@123Avr,Ikar,Smit,ad@gmail.com,+380666111111,true,1988-01-01
+1,Usr1,Avr@123Avr,Ivan,Maximoff,pechka@nexayshatat.com,+380676161616,true,1986-06-06
+2,Usr4,Avr@123Avr,Max,Maximoff,pisem@bing.net,,false,1986-06-06
+3,usr7,Abr@123Abr,Abrvalg,Neo,setMeMail@mail.com,,true,2001-05-19
+4,Usr6,Abk@123Ank,Turbo,John,Turbo@i.ua,,false,2001-01-01
+5,usr23,Adb@123Abk,Petya,Bendera,PR@i.ua,,false,2005-01-01
+6,Usr12,Avr@123Acx,Ukrop,Bendera,dombiliBombas@gaza.net,,false,1958-12-12
+7,Usr13,Avr@123Apx,Batko,Bendera,dombiliBombas8@gaza.net,,false,1942-12-12
+8,Usr22,Avr@123Avr,Maksik,Melkich,send@bing.net,,false,1986-08-06
