@@ -1,0 +1,202 @@
+body{
+    margin: 0;
+    background-color: #f2f2f2 !important;
+
+}
+
+nav{
+    display: inline-block !important;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.navbar1{
+    display: flex;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    margin-bottom: 16px;
+    justify-content: left;
+    padding: 8px;
+}
+
+.navbar1 img{
+    margin-left: 164px;
+    margin-right: 6px;
+    width: 36px;
+}
+
+.navbar-input{
+    width: 280px;
+    margin-right: 64px;
+}
+
+.page{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.info-tab{
+    margin-left: 158px;
+}
+
+.info-tab-data{
+    height: 300px;
+    background-color: white;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+
+.info-tab-actions{
+    height: 150px;
+    background-color: white;
+    position: sticky;
+    top: 76px;
+    border-radius: 8px;
+}
+
+.create-post{
+    background-color: salmon;
+    border-right: 8px;
+}
+
+.feed{
+    background-color: aqua;
+    border-radius: 8px;
+}
+
+.recommendations{
+    margin-right: 158px;
+}
+.recommendations-feed{
+    height: 400px;
+    background-color: blueviolet;
+    margin-bottom:12px;
+    border-radius: 8px;
+}
+
+.recommendation-fixed{
+    position: sticky;
+    top: 76px;
+}
+
+.recommendations-image{
+    height: 200px;
+    background-color: #2be249;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+
+.recommendations-footer{
+    height: 200px;
+    background-color: #e2ae2b;
+    border-radius: 8px;
+}
+
+.navbar-icons{
+    margin: 0 40px 0 40px;
+    font-size: 20px;
+}
+
+.shift-menu{
+    margin-left: 160px;
+    height: 40px;
+}
+
+.description {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   text-align: center;
+   font-size: 10px;
+}
+.nav-link {
+    padding: 0!important;
+    color: black;
+}
+
+.nav-item{
+    height: 40px;
+}
+
+.image-style{
+    height: 100px;
+}
+
+.profile-style{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 16px;
+}
+
+.underline{
+    border-bottom: solid 1px #E5E5E5;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+   text-decoration: none;
+   color: black;
+}
+
+.form-style{
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    margin-top: 5px;
+    grid-gap: 5px;
+}
+
+.shift-list{
+    padding-top: 5px;
+    padding-left: 20px;
+}
+
+.link-list{
+    display: inline-block;
+}
+
+.go-left{
+    float:left;
+}
+.go-right{
+    float: right;
+    padding-right: 10px;
+}
+
+.btn-sm{
+    height: 20px;
+}
+
+.round-button{
+   border:none;
+   background-color: transparent;
+   border-radius:12px;
+}
+
+.round-button:hover{
+   background-color: grey;
+}
+
+.discover-style{
+    padding-top: 5px;
+    align-self: center;
+}
+
+.solid-line{
+    padding-bottom: 10px;
+    border-bottom: solid 1px #E5E5E5;
+}
+
