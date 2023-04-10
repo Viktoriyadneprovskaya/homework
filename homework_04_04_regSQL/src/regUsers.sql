@@ -66,14 +66,14 @@ from regApp_requests.users
 where isAvailable=true;
 
 --#5
-select username
-,firstname
-,lastname
-,birthdate
-,p.phonenumber as phoneNumber
+select username,
+       firstname,
+       lastname,
+       birthdate,
+       p.phonenumber as phoneNumber
 from regapp_requests.users u
 left join regapp_requests.phonenumbers p on u.id = p.id_user
-where p.phonenumber is not null and p.phonenumber!='0';
+where p.phonenumber is not null;
 
 
 --#6
@@ -92,7 +92,7 @@ where firstname ~ '[a-zA-Z]{5,}';
 -- That's why I did this task in 2 ways: 1) sorted by username 2) show the oldest user
 select *
 from regApp_requests.users
-order by username asc
+order by username
 limit 1;
 
 select *
