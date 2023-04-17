@@ -205,7 +205,7 @@ from (SELECT product_id as id, storage.orders.quantity
       where date_trunc('MONTH', storage.orders.order_date) = date_trunc('month', current_date - interval '1' month))
          as sold
          full outer join "storage".product p on p.id = sold.id
-where sold.quantity is null
+where sold.quantity is null;
 --#5 var 3
 select "storage".product."name", "storage".product.price
 from "storage".product
