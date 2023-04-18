@@ -296,5 +296,60 @@ from storage.orders
 group by storage.orders.product_id
 having sum(storage.orders.customer_id) > 1) as ppp on orders.product_id = ppp.product_id
 group by salespersons_id
-having count(customer_id) > 1) rrr on storage.salespersons.id = rrr.salespersons_id
+having count(customer_id) > 1) rrr on storage.salespersons.id = rrr.salespersons_id;
+
+--#11
+select storage.customers.name, storage.customers.email, sum_quntity from storage.customers
+inner join (select storage.orders.customer_id, sum(storage.orders.quantity) as sum_quntity
+            from storage.orders
+            where date_trunc('year',storage.orders.order_date) = date_trunc('YEAR',current_date)
+            group by storage.orders.customer_id) amount ON amount.customer_id = storage.customers.ID
+order by sum_quntity desc
+limit 5;
+
+--#12
+select storage.product.name, sum_quntity from storage.product
+inner join(select storage.orders.product_id, sum(storage.orders.quantity) as sum_quntity
+        from storage.orders
+        where date_trunc('year',storage.orders.order_date) = date_trunc('YEAR',current_date)
+        group by storage.orders.product_id) amount ON amount.product_id=storage.product.ID
+order by sum_quntity desc
+limit 10;
+
+--#13
+select storage.product.name, sum_quntity from storage.product
+inner join (select storage.orders.product_id, sum(storage.orders.quantity) as sum_quntity
+            from storage.orders
+            where date_trunc('month',storage.orders.order_date) = date_trunc('month',current_date - interval '1' month)
+            group by storage.orders.product_id) amount ON amount.product_id=storage.product.ID
+order by sum_quntity desc
+limit 3;
+
+--#14
+ALTER TABLE storage.customers  ADD COLUMN data_reg date;
+
+UPDATE storage.customers  SET data_reg = '2023-01-02' WHERE ID=1;
+UPDATE storage.customers  SET data_reg = '2023-03-08' WHERE ID=2;
+UPDATE storage.customers  SET data_reg = '2022-08-23' WHERE ID=3;
+
+select storage.salespersons."name", storage.salespersons.email, revenue_sum
+from "storage".salespersons
+inner join
+(select sum(storage.orders.unit_price) as revenue_sum, storage.orders.customer_id,storage.orders.salespersons_id
+from "storage".orders
+inner join "storage".customers on storage.customers.id  = storage.orders.customer_id
+group by storage.orders.customer_id, storage.orders.salespersons_id,storage.customers.data_reg,storage.orders.order_date
+having date_trunc('year',storage.customers.data_reg) = date_trunc('year',current_date - interval '1' year)
+and date_trunc('quarter',storage.orders.order_date) = date_trunc('quarter',current_date - interval '3' month)) ppp on ppp.salespersons_id = storage.salespersons.id
+order by revenue_sum desc
+limit 5;
+
+--#15
+select storage.customers.name, storage.customers.email, average_order from storage.customers
+inner join (select storage.orders.customer_id, AVG(storage.orders.unit_price) as average_order  from storage.orders
+            where date_trunc('year',storage.orders.order_date) = date_trunc('YEAR',current_date)
+            group by customer_id) ord_aver ON ord_aver.customer_id = storage.customers.ID
+order by average_order desc
+limit 10;
+
 
