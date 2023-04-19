@@ -7,7 +7,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 
 //ToDo 1.Get a list of all the usernames in the list of Users.//Realised in method: loadUsers
@@ -30,20 +30,22 @@ public class RegistrationApp {
         UserService userService =new UserService();
         UserUtils userUtils =new UserUtils();
         List<User> users=userService.loadUsers(file);
+
         boolean exit = true;
         while (exit) {
             System.out.println("Hello! You can register user here" +
                     "To create user press 1, to list all available users press 2, to exit press 0");
-        try {
-            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+        try(BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in))) {
             int input = Integer.parseInt(bufferedReader.readLine());
             switch (input) {
                 case 1 -> {
                     User user = new User();
                     user.setId(users.size());
                     userUtils.fillUserFields(bufferedReader, user);
-                    users.add(user);
+
+                    userService.saveUser(user);
                     userService.saveUser(user, file);
+                    users.add(user);
                     //user.setAvailable();
                     System.out.println("User is created");
                     System.out.println(user);
@@ -51,6 +53,10 @@ public class RegistrationApp {
                 case 2 -> {
                     System.out.println("List of available users: ");
                     users.forEach(System.out::println);
+                }
+                case 12 ->{
+                    User username=userUtils.verifyUsername(bufferedReader);
+                    userService.editUserByUsername(username);
                 }
                 case 3 -> {
                     System.out.println(userUtils.filterByLastName(users,"S"));

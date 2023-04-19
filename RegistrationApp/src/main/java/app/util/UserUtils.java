@@ -1,8 +1,9 @@
 package app.util;
 
 import app.User;
+import app.dao.UserDao;
 
-import javax.swing.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -11,12 +12,35 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Function;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class UserUtils {
+
+    private final UserDao userDao=new UserDao();
+
+    public User verifyUsername(BufferedReader bufferedReader) throws IOException {
+
+        boolean check = true;
+        String username;
+        while (check) {
+            username = bufferedReader.readLine();
+            if(username.equals("X{")) {
+                return null;
+            }
+            if (validateUsername(username)) {
+                User user=userDao.findUserByUsername(username);
+                if(user!=null){
+                    return user;
+                }
+                System.out.println("You entered username that doesn't exist");
+                System.out.println("If you want to exit press 'X'");
+            } else {
+                System.out.println("You entered wrong username, it must contain only alpha-numeric values");
+            }
+        }
+        return null;
+    }
+
     public void fillUserFields(BufferedReader bufferedReader, User user) throws IOException {
         setUserName(bufferedReader, user);
         setUserPassword(bufferedReader, user);

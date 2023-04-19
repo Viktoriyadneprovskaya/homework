@@ -1,11 +1,18 @@
 package app.service;
 
 import app.User;
+import app.dao.UserDao;
 
 import java.io.*;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.*;
 public class UserService {
+
+    private final UserDao userDao= new UserDao();
+    public boolean saveUser(User user){
+        return userDao.createUser(user);
+    }
     public void saveUser(User user,File file){
         try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(file,true))){
             bufferedWriter.write(user.getId()+",");
@@ -19,6 +26,14 @@ public class UserService {
             bufferedWriter.write(user.getDate()+"\n");
         }catch (IOException e){
             System.out.println(e);
+        }
+    }
+
+    public void editUserByUsername(User user){
+        if(user==null){
+            System.out.println("You entered null");
+        }else {
+            System.out.println("Your user has username "+ user.getUsername());
         }
     }
     public List<User> loadUsers(File file) {
