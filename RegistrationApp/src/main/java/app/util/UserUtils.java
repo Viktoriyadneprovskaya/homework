@@ -19,12 +19,12 @@ public class UserUtils {
     private final UserDao userDao=new UserDao();
 
     public User verifyUsername(BufferedReader bufferedReader) throws IOException {
-
         boolean check = true;
         String username;
         while (check) {
+            System.out.println("Enter username to get info about user");
             username = bufferedReader.readLine();
-            if(username.equals("X{")) {
+            if(username.equals("X")) {
                 return null;
             }
             if (validateUsername(username)) {
@@ -111,7 +111,7 @@ public class UserUtils {
         }
     }
 
-    public void setUserAvailable(BufferedReader bufferedReader, User user) throws IOException {
+    public void setUserAvailable(BufferedReader bufferedReader, User user) {
         Random rd = new Random();
         boolean isAvailable = rd.nextBoolean();
         user.setAvailable(isAvailable);
@@ -143,97 +143,110 @@ public class UserUtils {
         }
     }
 
-    public boolean validateUsername(String text) {
-        return text.matches("[a-zA-Z0-9]{4,}");
-    }
-
-    public  boolean validatePassword(String password) {
-        String pat = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{4,}";
-        return (password.matches(pat));
-    }
-
-    public  boolean validateEmail(String email) {
-        String pattern = "\\w+@[a-zA-Z]+\\.[a-zA-Z]+";
-        return email.matches(pattern);
-    }
-
-    public boolean validateDate(String date) {
-        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        df.setLenient(false);
-        try {
-            df.parse(date);
-            return true;
-        } catch (ParseException ex) {
-            return false;
+    public void updateChangedUser(BufferedReader bufferedReader,User user) throws IOException {
+            System.out.println("The " + user.getUsername() + "'s first name is " + user.getFirstName() + ". You can change it.");
+            setUserFirstName(bufferedReader, user);
+            System.out.println("The " + user.getUsername() + "'s last name is " + user.getLastName() + ". You can change it.");
+            setUserLastName(bufferedReader, user);
+            System.out.println("The " + user.getUsername() + "'s birthday is " + user.getDate() + ". You can change it.");
+            setUserBirthday(bufferedReader, user);
+            System.out.println("The " + user.getUsername() + "'s phonenumber is " + user.getPhoneNumber() + ". You can change it.");
+            setPhoneNumber(bufferedReader, user);
+            userDao.updateUser(user);
         }
+
+        public boolean validateUsername (String text){
+            return text.matches("[a-zA-Z0-9]{4,}");
+        }
+
+        public boolean validatePassword (String password){
+            String pat = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{4,}";
+            return (password.matches(pat));
+        }
+
+        public boolean validateEmail (String email){
+            String pattern = "\\w+@[a-zA-Z]+\\.[a-zA-Z]+";
+            return email.matches(pattern);
+        }
+
+        public boolean validateDate (String date){
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            df.setLenient(false);
+            try {
+                df.parse(date);
+                return true;
+            } catch (ParseException ex) {
+                return false;
+            }
+        }
+
+        public boolean validatePhoneNumber (String number){
+            return number.matches("^[+][0-9]{12}");
+        }
+
+        //task #1
+        public List<String> showUsersLogins (List < User > users) {
+            return users.stream()
+                    .map(user -> user.getUsername())
+                    .toList();
+        }
+
+        //task #2
+        public List<User> filterByLastName (List < User > users, String S){
+            return users.stream()
+                    .filter(user -> user.getLastName().startsWith(S))
+                    .toList();
+        }
+
+        //task #3
+        public List<User> filterCorrectMailEndingWithString (List < User > users, String S){
+            return users.stream()
+                    .filter(user -> user.getEmail().endsWith(S))
+                    .toList();
+        }
+
+        public List<User> showAvailable (List < User > users) {
+            return users.stream()
+                    .filter(User::getIsAvailable)
+                    .collect(Collectors.toList());
+        }
+
+        public List<User> showOnlyWithPhone (List < User > users) {
+            return users.stream().filter(user -> user.getPhoneNumber() != null)
+                    .filter(user -> user.getPhoneNumber() != "")
+                    .toList();
+        }
+
+        public Map<String, List<User>> groupUsers (List < User > users) {
+            return users.stream()
+                    .sorted(Comparator.comparing(User::getLastName)
+                            .thenComparing(User::getFirstName))
+                    .collect(Collectors.groupingBy(User::getLastName));
+        }
+
+        public List<User> findByPattern (List < User > users, String patternStr){
+            return users.stream()
+                    .filter(user -> user.getUsername().matches(patternStr))
+                    .sorted(Comparator.comparing(User::getLastName))
+                    .toList();
+        }
+
+        public Map<Integer, LocalDate> findEarliestDate (List < User > users) {
+            return users.stream()
+                    .sorted(Comparator.comparing(User::getDate))
+                    .findFirst()
+                    .stream()
+                    .collect(Collectors.toMap(User::getId, User::getDate));
+        }
+
+        public Map<Month, List<User>> filterByYearSortByMonth (List < User > users, LocalDate year){
+            return users.stream()
+                    .filter(user -> user.getDate().getYear() == year.getYear())
+                    .toList()
+                    .stream()
+                    .collect(Collectors.groupingBy(user -> user.getDate().getMonth()));
+
+        }
+
     }
 
-    public boolean validatePhoneNumber(String number) {
-        return number.matches("^[+][0-9]{12}");
-    }
-
-    //task #1
-    public List<String> showUsersLogins(List<User> users) {
-        return users.stream()
-                .map(user -> user.getUsername())
-                .toList();
-    }
-
-    //task #2
-    public List<User> filterByLastName(List<User> users, String S) {
-        return users.stream()
-                .filter(user -> user.getLastName().startsWith(S))
-                .toList();
-    }
-
-    //task #3
-    public List<User> filterCorrectMailEndingWithString(List<User> users, String S) {
-        return users.stream()
-                .filter(user -> user.getEmail().endsWith(S))
-                .toList();
-    }
-
-    public List<User> showAvailable(List<User> users) {
-        return users.stream()
-                .filter(User::getIsAvailable)
-                .collect(Collectors.toList());
-    }
-
-    public List<User> showOnlyWithPhone(List<User> users) {
-        return users.stream().filter(user -> user.getPhoneNumber() != null)
-                .filter(user -> user.getPhoneNumber() != "")
-                .toList();
-    }
-
-    public Map<String, List<User>> groupUsers(List<User> users) {
-        return users.stream()
-                .sorted(Comparator.comparing(User::getLastName)
-                        .thenComparing(User::getFirstName))
-                .collect(Collectors.groupingBy(User::getLastName));
-    }
-
-    public List<User> findByPattern(List<User> users, String patternStr) {
-        return users.stream()
-                .filter(user -> user.getUsername().matches(patternStr))
-                .sorted(Comparator.comparing(User::getLastName))
-                .toList();
-    }
-
-    public Map<Integer, LocalDate> findEarliestDate(List<User> users) {
-        return users.stream()
-                .sorted(Comparator.comparing(User::getDate))
-                .findFirst()
-                .stream()
-                .collect(Collectors.toMap(User::getId, User::getDate));
-    }
-
-    public Map<Month, List<User>> filterByYearSortByMonth(List<User> users, LocalDate year) {
-        return users.stream()
-                .filter(user -> user.getDate().getYear() == year.getYear())
-                .toList()
-                .stream()
-                .collect(Collectors.groupingBy(user -> user.getDate().getMonth()));
-
-    }
-
-}

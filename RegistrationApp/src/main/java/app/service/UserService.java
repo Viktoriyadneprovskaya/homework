@@ -28,8 +28,7 @@ public class UserService {
             System.out.println(e);
         }
     }
-
-    public void editUserByUsername(User user){
+    public void editUser(User user){
         if(user==null){
             System.out.println("You entered null");
         }else {
