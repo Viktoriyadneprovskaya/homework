@@ -2,11 +2,18 @@ package app.service;
 
 import app.User;
 import app.dao.UserDao;
+import app.util.UserUtils;
 
-import java.io.*;
-import java.sql.Connection;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserService {
 
     private final UserDao userDao= new UserDao();
@@ -28,13 +35,19 @@ public class UserService {
             System.out.println(e);
         }
     }
-    public void editUser(User user){
-        if(user==null){
-            System.out.println("You entered null");
-        }else {
-            System.out.println("Your user has username "+ user.getUsername());
-        }
+    public void updateChangedUser(BufferedReader bufferedReader,User user) throws IOException {
+        UserUtils userUtils=new UserUtils();
+        System.out.println("The " + user.getUsername() + "'s first name is " + user.getFirstName() + ". You can change it.");
+        userUtils.setUserFirstName(bufferedReader, user);
+        System.out.println("The " + user.getUsername() + "'s last name is " + user.getLastName() + ". You can change it.");
+        userUtils.setUserLastName(bufferedReader, user);
+        System.out.println("The " + user.getUsername() + "'s birthday is " + user.getDate() + ". You can change it.");
+        userUtils.setUserBirthday(bufferedReader, user);
+        System.out.println("The " + user.getUsername() + "'s phonenumber is " + user.getPhoneNumber() + ". You can change it.");
+        userUtils.setPhoneNumber(bufferedReader, user);
+        userDao.updateUser(user);
     }
+
     public List<User> loadUsers(File file) {
         List<User> users = new ArrayList<>();
         if (!file.exists()) {

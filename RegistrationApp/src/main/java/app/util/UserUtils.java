@@ -11,7 +11,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class UserUtils {
@@ -142,18 +145,6 @@ public class UserUtils {
             }
         }
     }
-
-    public void updateChangedUser(BufferedReader bufferedReader,User user) throws IOException {
-            System.out.println("The " + user.getUsername() + "'s first name is " + user.getFirstName() + ". You can change it.");
-            setUserFirstName(bufferedReader, user);
-            System.out.println("The " + user.getUsername() + "'s last name is " + user.getLastName() + ". You can change it.");
-            setUserLastName(bufferedReader, user);
-            System.out.println("The " + user.getUsername() + "'s birthday is " + user.getDate() + ". You can change it.");
-            setUserBirthday(bufferedReader, user);
-            System.out.println("The " + user.getUsername() + "'s phonenumber is " + user.getPhoneNumber() + ". You can change it.");
-            setPhoneNumber(bufferedReader, user);
-            userDao.updateUser(user);
-        }
 
         public boolean validateUsername (String text){
             return text.matches("[a-zA-Z0-9]{4,}");
