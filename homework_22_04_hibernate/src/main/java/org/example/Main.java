@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.entity.Movie;
 import service.MovieService;
+import utils.HibernateSessionFactoryUtil;
 
 
 public class Main {
@@ -21,7 +22,7 @@ public class Main {
 
 
         MovieService movieService = new MovieService();
-        Movie movie = new Movie("Comedy movie", 2020,"UA");
+        Movie movie = new Movie("Comedy movie", 2020, "UA");
         movieService.saveMovie(movie);
         System.out.println(movieService.findMovie(1L));
         Movie movie1 = new Movie("Drama movie", 2022,"ENG");
@@ -43,8 +44,6 @@ public class Main {
         movieService.deleteMovie(movie8);
         Movie movie9 = new Movie("Nature movie", 2019,"UA");
         movieService.saveMovie(movie9);
-
+        HibernateSessionFactoryUtil.closeSessionFactoryConnection();
     }
-
-
-    }
+}
