@@ -7,3 +7,4 @@
 6,Usr12,Avr@123Acx,Ukrop,Bendera,dombiliBombas@gaza.net,,false,1958-12-12
 7,Usr13,Avr@123Apx,Batko,Bendera,dombiliBombas8@gaza.net,,false,1942-12-12
 8,Usr22,Avr@123Avr,Maksik,Melkich,send@bing.net,,false,1986-08-06
+9,user1,Fhjkll@,firstname,lastname,email@mail.com,+380503323333,true,1999-05-20

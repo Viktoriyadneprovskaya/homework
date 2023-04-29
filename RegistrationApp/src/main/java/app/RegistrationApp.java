@@ -7,7 +7,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 //ToDo 1.Get a list of all the usernames in the list of Users.//Realised in method: loadUsers
@@ -26,84 +25,93 @@ import java.util.stream.Collectors;
 public class RegistrationApp {
 
     public void runApp() {
-        File file=new File("users.txt");
-        UserService userService =new UserService();
-        UserUtils userUtils =new UserUtils();
-        List<User> users=userService.loadUsers(file);
+        File file = new File("users.txt");
+        UserService userService = new UserService();
+        UserUtils userUtils = new UserUtils();
+        List<User> users = userService.loadUsers(file);
         boolean exit = true;
         while (exit) {
             System.out.println("Hello! You can register user here" +
                     "To create user press 1, to list all available users press 2, to exit press 0");
-        try {
-            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-            int input = Integer.parseInt(bufferedReader.readLine());
-            switch (input) {
-                case 1 -> {
-                    User user = new User();
-                    user.setId(users.size());
-                    userUtils.fillUserFields(bufferedReader, user);
-                    users.add(user);
-                    userService.saveUser(user, file);
-                    //user.setAvailable();
-                    System.out.println("User is created");
-                    System.out.println(user);
-                }
-                case 2 -> {
-                    System.out.println("List of available users: ");
-                    users.forEach(System.out::println);
-                }
-                case 3 -> {
-                    System.out.println(userUtils.filterByLastName(users,"S"));
-                }
-                case 4 -> {
-                    System.out.println(userUtils.filterCorrectMailEndingWithString(users,".com"));
-                }
-                case 5 -> {
-                    System.out.println(userUtils.showUsersLogins(users));
-                }
-                case 6-> {
-                    System.out.println(userUtils.showAvailable(users));
-                }
-                case 7-> {
-                    System.out.println(userUtils.showOnlyWithPhone(users));
-                }
-                case 8-> {
-                    Map<String,List<User>> mapUser = userUtils.groupUsers(users);
-                    for (Map.Entry<String,List<User>> userElement:mapUser.entrySet()){
-                        System.out.println("----------------------------------------");
-                        System.out.println(userElement.getKey());
-                        for (User user:userElement.getValue()){
-                            System.out.println("   name: "+user.getFirstName());
+            BufferedReader bufferedReader = null;
+            try {
+                bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+                int input = Integer.parseInt(bufferedReader.readLine());
+                switch (input) {
+                    case 1 -> {
+                        User user = new User();
+                        user.setId(users.size());
+                        userUtils.fillUserFields(bufferedReader, user);
+                        boolean result = userService.saveUser(user);
+                        if (result) {
+                            userService.saveUser(user, file);
+                            users.add(user);
+                            System.out.println("User is created");
+                            System.out.println(user);
+                        } else {
+                            System.out.println("Wrong!!");
                         }
                     }
-                }
-                case 9 -> {
-                    System.out.println(userUtils.findByPattern(users,"[a-zA-Z]{3,}[0-9]{2,}"));
-                }
-                case 10 ->{
-                    Map<Integer, LocalDate> mapUser = userUtils.findEarliestDate(users);
-                    System.out.println(mapUser);
-                }
-                case 11->{
-                    LocalDate year = LocalDate.of(1986,01,01);
-                    Map<Month,List<User>> sortedByMonthUsers = userUtils.filterByYearSortByMonth(users,year);
-                    for (Map.Entry<Month,List<User>> userElement:sortedByMonthUsers.entrySet()){
-                        System.out.println(userElement.getKey()+ "\n"+userElement.getValue());
+                    case 2 -> {
+                        System.out.println("List of available users: ");
+                        users.forEach(System.out::println);
                     }
+                    case 12 -> {
+                        User userBeforeEdit = userUtils.verifyUsername(bufferedReader);
+                        userService.updateChangedUser(bufferedReader, userBeforeEdit);
+                    }
+                    case 3 -> {
+                        System.out.println(userUtils.filterByLastName(users, "S"));
+                    }
+                    case 4 -> {
+                        System.out.println(userUtils.filterCorrectMailEndingWithString(users, ".com"));
+                    }
+                    case 5 -> {
+                        System.out.println(userUtils.showUsersLogins(users));
+                    }
+                    case 6 -> {
+                        System.out.println(userUtils.showAvailable(users));
+                    }
+                    case 7 -> {
+                        System.out.println(userUtils.showOnlyWithPhone(users));
+                    }
+                    case 8 -> {
+                        Map<String, List<User>> mapUser = userUtils.groupUsers(users);
+                        for (Map.Entry<String, List<User>> userElement : mapUser.entrySet()) {
+                            System.out.println("----------------------------------------");
+                            System.out.println(userElement.getKey());
+                            for (User user : userElement.getValue()) {
+                                System.out.println("   name: " + user.getFirstName());
+                            }
+                        }
+                    }
+                    case 9 -> {
+                        System.out.println(userUtils.findByPattern(users, "[a-zA-Z]{3,}[0-9]{2,}"));
+                    }
+                    case 10 -> {
+                        Map<Integer, LocalDate> mapUser = userUtils.findEarliestDate(users);
+                        System.out.println(mapUser);
+                    }
+                    case 11 -> {
+                        LocalDate year = LocalDate.of(1986, 01, 01);
+                        Map<Month, List<User>> sortedByMonthUsers = userUtils.filterByYearSortByMonth(users, year);
+                        for (Map.Entry<Month, List<User>> userElement : sortedByMonthUsers.entrySet()) {
+                            System.out.println(userElement.getKey() + "\n" + userElement.getValue());
+                        }
+                    }
+                    case 0 -> {
+                        exit = false;
+                        System.out.println("Thank you for using our application");
+                    }
+                    default -> System.out.println("Wrong action, choose correct one(1,2,3)");
                 }
-                case 0 -> {
-                    exit = false;
-                    System.out.println("Thank you for using our application");
-                }
-                default ->System.out.println("Wrong action, choose correct one(1,2,3)");
-            }
-            }catch (NumberFormatException exception){
+            } catch (NumberFormatException exception) {
                 System.out.println(exception.getStackTrace()[0].toString());
                 System.out.println("Wrong action, choose correct one(1,2,3)");
                 System.out.println("Let's repeat your action!\n");
-            }catch (IOException e){
-            throw new RuntimeException(e);
-        }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
