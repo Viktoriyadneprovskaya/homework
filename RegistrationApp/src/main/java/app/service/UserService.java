@@ -29,7 +29,7 @@ public class UserService {
             bufferedWriter.write(user.getLastName()+",");
             bufferedWriter.write(user.getEmail()+",");
             bufferedWriter.write(user.getPhoneNumber()+",");
-            bufferedWriter.write(user.getIsAvailable()+",");
+            bufferedWriter.write(user.isAvailable()+",");
             bufferedWriter.write(user.getDate()+"\n");
         }catch (IOException e){
             System.out.println(e);
@@ -65,7 +65,7 @@ public class UserService {
                     } else {
                         String[] usersToString = line.split(",");
                         User user = new User();
-                        user.setId(Integer.parseInt(usersToString[0]));
+                        user.setId(Long.valueOf(usersToString[0]));
                         user.setUsername(usersToString[1]);
                         user.setPassword(usersToString[2]);
                         user.setFirstName(usersToString[3]);
