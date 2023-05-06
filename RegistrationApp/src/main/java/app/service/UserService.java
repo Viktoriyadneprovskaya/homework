@@ -2,6 +2,7 @@ package app.service;
 
 import app.User;
 import app.dao.UserDao;
+import app.dao.UserDaoJDBC;
 import app.util.UserUtils;
 
 import java.io.BufferedReader;
@@ -15,8 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
+    private final UserDao userDao;
+    public UserService(UserDao userDao){
+        this.userDao=userDao;
+    }
 
-    private final UserDao userDao= new UserDao();
+
     public boolean saveUser(User user){
         return userDao.createUser(user);
     }
@@ -83,5 +88,9 @@ public class UserService {
         }
         return users;
     }
+
+//    public List<User> loadUsersHib(){
+//
+//    }
 
 }

@@ -1,5 +1,7 @@
 package app;
 
+import app.dao.UserDao;
+import app.dao.UserDaoHibernate;
 import app.service.UserService;
 import app.util.UserUtils;
 
@@ -25,8 +27,9 @@ import java.util.*;
 public class RegistrationApp {
 
     public void runApp() {
+        UserDaoHibernate userDaoHibernate = new UserDaoHibernate();//need to check
         File file = new File("users.txt");
-        UserService userService = new UserService();
+        UserService userService = new UserService(userDaoHibernate);//need to check
         UserUtils userUtils = new UserUtils();
         List<User> users = userService.loadUsers(file);
         boolean exit = true;
@@ -40,7 +43,7 @@ public class RegistrationApp {
                 switch (input) {
                     case 1 -> {
                         User user = new User();
-                        user.setId(users.size());
+                        user.setId((long) users.size());
                         userUtils.fillUserFields(bufferedReader, user);
                         boolean result = userService.saveUser(user);
                         if (result) {
@@ -89,7 +92,7 @@ public class RegistrationApp {
                         System.out.println(userUtils.findByPattern(users, "[a-zA-Z]{3,}[0-9]{2,}"));
                     }
                     case 10 -> {
-                        Map<Integer, LocalDate> mapUser = userUtils.findEarliestDate(users);
+                        Map<Long, LocalDate> mapUser = userUtils.findEarliestDate(users);
                         System.out.println(mapUser);
                     }
                     case 11 -> {

@@ -2,11 +2,9 @@ package app.dao;
 import app.User;
 import app.util.DbUtils;
 
-import javax.xml.transform.Result;
 import java.sql.*;
-import java.time.LocalDate;
 
-public class UserDao {
+public class UserDaoJDBC implements UserDao {
 
         public boolean createUser(User user) {
             try(Connection connection= DbUtils.getConnection()) {
@@ -54,6 +52,47 @@ public class UserDao {
             }
         }
 
+    @Override //need to check
+    public User getUserByID(Long id) {
+        try (Connection connection = DbUtils.getConnection()) {
+            String sql = """
+                    select * from regg_app.users                     
+                    where user_id=?
+                    """;
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1,id);
+            ResultSet resultSet = pstmt.executeQuery();
+            if(!resultSet.next()){
+                return null;
+            }else {
+                User user = new User();
+                user.setUsername(resultSet.getString("username"));
+                user.setFirstName(resultSet.getString("firstname"));
+                user.setLastName(resultSet.getString("lastname"));
+                user.setDate(resultSet.getDate("birth_date").toLocalDate());
+                user.setPhoneNumber(resultSet.getString("phone_number"));
+                return user;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override //need to check
+    public void deleteUser(Long id) {
+        try(Connection connection= DbUtils.getConnection()) {
+            String sql = """
+                   delete from regg_app.users
+                    where user_id=?
+                    """;
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1,id);
+            pstmt.executeUpdate();//I can make this method boolean and add row result
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean updateUser(User user){
         try(Connection connection= DbUtils.getConnection()) {
             String sql = """
@@ -79,5 +118,6 @@ public class UserDao {
             throw new RuntimeException(e);
         }
     }
+
 }
 

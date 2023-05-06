@@ -1,7 +1,8 @@
 package app.util;
 
+//import app.service.UserService;
 import app.User;
-import app.dao.UserDao;
+import app.dao.UserDaoJDBC;
 
 
 import java.io.BufferedReader;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class UserUtils {
 
-    private final UserDao userDao=new UserDao();
+    private final UserDaoJDBC userDaoJDBC =new UserDaoJDBC();
 
     public User verifyUsername(BufferedReader bufferedReader) throws IOException {
         boolean check = true;
@@ -31,7 +32,7 @@ public class UserUtils {
                 return null;
             }
             if (validateUsername(username)) {
-                User user=userDao.findUserByUsername(username);
+                User user= userDaoJDBC.findUserByUsername(username);
                 if(user!=null){
                     return user;
                 }
@@ -198,7 +199,7 @@ public class UserUtils {
 
         public List<User> showAvailable (List < User > users) {
             return users.stream()
-                    .filter(User::getIsAvailable)
+                    .filter(User::isAvailable)
                     .collect(Collectors.toList());
         }
 
@@ -222,7 +223,7 @@ public class UserUtils {
                     .toList();
         }
 
-        public Map<Integer, LocalDate> findEarliestDate (List < User > users) {
+        public Map<Long, LocalDate> findEarliestDate (List < User > users) {
             return users.stream()
                     .sorted(Comparator.comparing(User::getDate))
                     .findFirst()

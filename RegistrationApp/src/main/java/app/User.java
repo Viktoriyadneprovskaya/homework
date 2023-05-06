@@ -3,6 +3,7 @@ package app;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "users", schema = "regg_app")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
