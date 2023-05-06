@@ -17,5 +17,6 @@
         <property name="hibernate.connection.autocommit">true</property>
         <!--     DB schema will be updated if needed -->
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping class="app.User"/>
     </session-factory>
 </hibernate-configuration>
