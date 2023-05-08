@@ -27,9 +27,9 @@ import java.util.*;
 public class RegistrationApp {
 
     public void runApp() {
-        UserDaoHibernate userDaoHibernate = new UserDaoHibernate();//need to check
+        UserDaoHibernate userDaoHibernate = new UserDaoHibernate();
         File file = new File("users.txt");
-        UserService userService = new UserService(userDaoHibernate);//need to check
+        UserService userService = new UserService(userDaoHibernate);
         UserUtils userUtils = new UserUtils();
         List<User> users = userService.loadUsers(file);
         boolean exit = true;

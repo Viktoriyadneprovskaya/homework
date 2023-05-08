@@ -12,24 +12,23 @@ public class UserDaoHibernate implements UserDao {//all need to check
 
     @Override
     public boolean createUser(User user) {
-            Session session =  HibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            Long id =  (Long) session.save(user);
-            transaction.commit();
-            session.close();
-            return id != null;
-        //need to overwrite
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Long id = (Long) session.save(user);
+        transaction.commit();
+        session.close();
+        return id != null;
     }
 
     @Override
-    public boolean updateUser(User user) {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.update(user);
-            transaction.commit();
-        }
-        return true; //need to overwrite
+    public void updateUser(User user) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(user);
+        transaction.commit();
+        session.close();
+
     }
 
     @Override
@@ -56,15 +55,16 @@ public class UserDaoHibernate implements UserDao {//all need to check
 
     @Override
     public void deleteUser(Long id) {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.delete(id);
-            transaction.commit();
-        }
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(id);
+        transaction.commit();
+        session.close();
     }
-
 }
+
+
 
 
 

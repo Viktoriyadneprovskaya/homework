@@ -9,7 +9,7 @@ public class UserDaoJDBC implements UserDao {
         public boolean createUser(User user) {
             try(Connection connection= DbUtils.getConnection()) {
                 String sql = """
-                    insert into regg_app.users(username, password, firstname, lastname, birth_date, email)
+                    insert into regg_app.users(username, password, firstname, lastname, date, email)
                     values(?, ?, ?, ?, ?, ?)
                     """;
                 PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class UserDaoJDBC implements UserDao {
         try (Connection connection = DbUtils.getConnection()) {
             String sql = """
                     select * from regg_app.users                     
-                    where user_id=?
+                    where id=?
                     """;
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1,id);
@@ -83,7 +83,7 @@ public class UserDaoJDBC implements UserDao {
         try(Connection connection= DbUtils.getConnection()) {
             String sql = """
                    delete from regg_app.users
-                    where user_id=?
+                    where id=?
                     """;
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1,id);
@@ -93,11 +93,11 @@ public class UserDaoJDBC implements UserDao {
         }
     }
 
-    public boolean updateUser(User user){
+    public void updateUser(User user){
         try(Connection connection= DbUtils.getConnection()) {
             String sql = """
                     update regg_app.users                     
-                    set firstname=?, lastname=?, birth_date=?, phone_number=?
+                    set firstname=?, lastname=?, date=?, phonenumber=?
                     where username=?
                     """;
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -107,13 +107,13 @@ public class UserDaoJDBC implements UserDao {
             pstmt.setString(4, user.getPhoneNumber());
             pstmt.setString(5, user.getUsername());
             int row = pstmt.executeUpdate();
-            if (row > 0){
-                System.out.println("Success! User is changed");
-                return true;
-            }else {
-                System.out.println("Something wrong");
-                return false;
-            }
+//            if (row > 0){
+//                System.out.println("Success! User is changed");
+//                return true;
+//            }else {
+//                System.out.println("Something wrong");
+//                return false;
+//            }
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
