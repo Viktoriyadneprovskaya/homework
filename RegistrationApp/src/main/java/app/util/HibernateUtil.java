@@ -15,4 +15,11 @@ public class HibernateUtil {
         }
         return sessionFactory;
     }
+    public static void closeSessionFactoryConnection() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        } else {
+            System.out.println("Session factory not found");
+        }
+    }
 }

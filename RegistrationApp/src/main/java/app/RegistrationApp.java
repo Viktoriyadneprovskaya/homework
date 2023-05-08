@@ -3,6 +3,7 @@ package app;
 import app.dao.UserDao;
 import app.dao.UserDaoHibernate;
 import app.service.UserService;
+import app.util.HibernateUtil;
 import app.util.UserUtils;
 
 import java.io.*;
@@ -116,6 +117,7 @@ public class RegistrationApp {
                 throw new RuntimeException(e);
             }
         }
+        HibernateUtil.closeSessionFactoryConnection();
     }
 }
 
