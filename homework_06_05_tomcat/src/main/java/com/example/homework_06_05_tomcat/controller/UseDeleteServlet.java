@@ -11,7 +11,7 @@ import java.io.IOException;
 public class UseDeleteServlet extends HttpServlet {
     private final UserDaoImpl userDao;
 
-    public UseDeleteServlet(UserDaoImpl userDao) {
+    public UseDeleteServlet() {
 
         this.userDao = new UserDaoImpl();
     }

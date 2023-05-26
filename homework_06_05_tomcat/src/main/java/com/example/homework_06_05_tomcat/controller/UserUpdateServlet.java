@@ -13,14 +13,13 @@ import java.time.LocalDate;
 public class UserUpdateServlet extends HttpServlet {
     private final UserDaoImpl userDao;
 
-    public UserUpdateServlet(UserDaoImpl userDao) {
-
+    public UserUpdateServlet() {
         this.userDao = new UserDaoImpl();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id =Long.parseLong(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id"));
         String username = request.getParameter("username");
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastname");
@@ -39,7 +38,7 @@ public class UserUpdateServlet extends HttpServlet {
                 .date(birthDate)
                 .build();
 
-        userDao.updateUserById(id,userUpdateCommand);
+        userDao.updateUserById(id, userUpdateCommand);
         response.sendRedirect("users");
     }
 }

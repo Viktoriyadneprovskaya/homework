@@ -8,6 +8,7 @@ import com.example.homework_06_05_tomcat.dao.UserDaoImpl;
 import com.example.homework_06_05_tomcat.model.User;
 import com.example.homework_06_05_tomcat.model.command.UserCommand;
 import com.example.homework_06_05_tomcat.util.HibernateUtil;
+import com.example.homework_06_05_tomcat.util.UserValidation;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -15,28 +16,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-
 @WebServlet(name = "users-servlet", value = "/users")
 public class UserServlet extends HttpServlet {
 
     private final UserDaoImpl userDao;
 
-    public UserServlet(UserDaoImpl userDao) {
+    public UserServlet() {
+
         this.userDao = new UserDaoImpl();
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//        Session session = sessionFactory.openSession();
-//        Transaction transaction = session.beginTransaction();
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-//        criteria.from(User.class);
-//        List<User> users =session.createQuery(criteria).getResultList();
-//        transaction.commit();
-
-
         List<User> dbusers = userDao.getAllUsers();
         List<UserCommand> usersCommand = UserCommand.usersToCommand(dbusers);
 
@@ -44,7 +33,7 @@ public class UserServlet extends HttpServlet {
         request.getRequestDispatcher("users.jsp").forward(request,response);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = request.getParameter("username");
+        String username=request.getParameter("username");
         String password =request.getParameter("password");
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastname");
