@@ -17,9 +17,13 @@
 }
 .modal{
     background-color: #c2bfbf;
+    visibility: hidden;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.m-visible{
+    visibility: visible;
 }
 .modal-form{
     background-color: #ffffff;
@@ -44,4 +48,7 @@
 }
 .error{
     display: none;
+}
+.s-visible{
+    display: flex !important;
 }

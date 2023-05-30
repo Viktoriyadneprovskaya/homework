@@ -19,12 +19,12 @@ import lombok.ToString;
 @Builder
 
 public class UserUpdateCommand {
-    String username;
-    String password;
-    String lastName;
-    String firstName;
-    LocalDate date;
-    String email;
-    String phoneNumber;
-    String address;
+    private String username;
+    private String password;
+    private String lastName;
+    private String firstName;
+    private LocalDate date;
+    private String email;
+    private String phoneNumber;
+    private String address;
 }
