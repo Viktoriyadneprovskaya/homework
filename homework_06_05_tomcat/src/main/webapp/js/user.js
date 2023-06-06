@@ -1,6 +1,6 @@
 const modal = document.getElementById('modal')
 const add_button = document.getElementById('add-btn')
-const close_span = document.getElementById('modal-close')
+const add_close_span = document.getElementById('modal-close')
 
 const edit_modal = document.getElementById('edit-modal')
 const edit_close_span = document.getElementById('edit-modal-close')
@@ -10,17 +10,14 @@ add_button.onclick = function () {
     modal.style.visibility = "visible"
 }
 
-close_span.onclick = function () {
-    modal.classList.remove('m-visible')
-}
-
-edit_close_span.onclick = function () {
+add_close_span.onclick = function () {
     modal.style.visibility = "hidden"
     const error_username = document.getElementById('error-username')
     error_username.classList.remove('s-visible')
     const error_firstname = document.getElementById('error-firstname')
     error_firstname.classList.remove('s-visible')
     const error_lastname = document.getElementById('error-lastname')
+
     error_lastname.classList.remove('s-visible')
     const error_email = document.getElementById('error-email')
     error_email.classList.remove('s-visible')
@@ -36,8 +33,10 @@ edit_close_span.onclick = function () {
     document.getElementById('address-input').value = ''
     document.getElementById('phone-input').value = ''
     //document.getElementById('birthday-input').value = ''
+}
 
-
+edit_close_span.onclick = function () {
+    edit_modal.classList.remove('m-visible')
 }
 
 function openEditModal(id, username, firstname, lastname, email, phonenumber, date, address) {
@@ -59,7 +58,6 @@ function openEditModal(id, username, firstname, lastname, email, phonenumber, da
     edit_phonenumber.value = phonenumber
     edit_birthdate.value = date
     edit_address.value = address
-
 }
 
 function usernameValidation() {
@@ -177,11 +175,11 @@ function birthdayValidation() {
         const birthday = new Date(input_value);
         const error_year = new Date(1900, 1, 1);
 
-        if(error_year<birthday<today){
+        if (error_year < birthday < today) {
             error.classList.remove('s-visible')
             document.getElementById('birthday-input').style.border = "2px solid green"
             document.getElementById('birthday-input').style.boxShadow = "inset green 0 0 5px 0"
-        }else{
+        } else {
             error.classList.add('s-visible')
             document.getElementById('birthday-input').style.border = "2px solid red"
             document.getElementById('birthday-input').style.boxShadow = "inset red 0 0 5px 0"

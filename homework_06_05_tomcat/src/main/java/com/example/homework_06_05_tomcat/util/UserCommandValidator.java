@@ -1,5 +1,7 @@
 package com.example.homework_06_05_tomcat.util;
 
+import com.example.homework_06_05_tomcat.dao.UserDaoImpl;
+import com.example.homework_06_05_tomcat.dao.impl.UserDao;
 import com.example.homework_06_05_tomcat.model.command.UserUpdateCommand;
 import com.example.homework_06_05_tomcat.model.error.ValidationError;
 
@@ -47,6 +49,7 @@ public class UserCommandValidator {
         return errors;
     }
     private static boolean validateUsername (String text){
+
         return text.matches("[a-zA-Z0-9]{4,}");
     }
     private static boolean validatePassword (String password){

@@ -16,7 +16,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.NamedQuery;
+import org.hibernate.annotations.NamedQueries;
 
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "User.findByUserName",
+                        query = "from User u where u.username = :username"
+                )
+        }
+
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -46,6 +57,4 @@ public class User {
     String address;
     @Column(name = "isavailable")
     boolean isAvailable;
-
-
-    }
+}

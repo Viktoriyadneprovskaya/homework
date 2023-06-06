@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/users.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/users.css">
     <title>Table of registered users</title>
 </head>
 <body>
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="modal ${errors!=null ? 'm-visible' : ''}" id="  edit-modal">
+    <div class="modal ${errors!=null ? 'm-visible' : ''}" id="edit-modal">
         <div class="modal-form">
             <span class="close" id="edit-modal-close">&times</span>
             <h2 class="title">Update existing user</h2>
@@ -84,10 +84,11 @@
                            placeholder="Phonenumber"
                            required>
                     <span class="error ${errors['phone'] != null ? 's-visible' : ''}" id="error-edit-phone">Phonenumber should contain only numbers</span>
-                    <input type="date" name="birthdate" id="birthday-edit-input" value="${date  !=null ? date : ''}" class="edge"
-                            placeholder="Birthdate"
-                            required>
-<%--                    правильно распарсить дату сюда--%>
+                    <input type="date" name="birthdate" id="birthday-edit-input" value="${date  !=null ? date : ''}"
+                           class="edge"
+                           placeholder="Birthdate"
+                           required>
+                    <%--                    правильно распарсить дату сюда--%>
                     <span class="error ${errors['date'] != null ? 's-visible' : ''}" id="error-edit-birthday">Enter correct birthdate</span>
                     <button type="submit" class="edge">Update</button>
                 </div>
@@ -139,6 +140,6 @@
         </tbody>
     </table>
 </div>
-<script src="/js/user.js"></script>
+<script src="${pageContext.request.contextPath}/js/user.js"></script>
 </body>
 </html>
