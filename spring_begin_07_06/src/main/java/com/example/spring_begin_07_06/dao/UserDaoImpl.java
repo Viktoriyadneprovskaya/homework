@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class  UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao {
     private final SessionFactory sessionFactory;
-    public UserDaoImpl(SessionFactory sessionFactory){
-        this.sessionFactory=sessionFactory;
+
+    public UserDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
+
     @Override
     public Optional<User> getUserById(Long id) {
         Session session = sessionFactory.openSession();
@@ -43,7 +45,7 @@ public class  UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void createUser(User user) {
+    public void saveUser(User user) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(user);
