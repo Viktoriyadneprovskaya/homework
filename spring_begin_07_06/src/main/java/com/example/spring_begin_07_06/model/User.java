@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.NamedQueries;
@@ -44,8 +40,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    Long id;
+    @Column(name = "user_id")
+    Long user_id;
     String username;
     String password;
     @Column(name = "lastname")
@@ -61,5 +57,10 @@ public class User implements Serializable {
     String address;
     @Column(name = "isavailable")
     boolean isAvailable;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+    joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
+    inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
+    private List<Role> roles;
 }
 
