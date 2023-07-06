@@ -1,12 +1,14 @@
-package com.example.spring_begin_07_06.dao;
+package com.example.spring_begin_07_06.dao.impl;
 
-import com.example.spring_begin_07_06.dao.impl.UserDao;
+import com.example.spring_begin_07_06.dao.UserDao;
 import com.example.spring_begin_07_06.model.User;
 import com.example.spring_begin_07_06.model.command.UserUpdateCommand;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -42,6 +44,16 @@ public class UserDaoImpl implements UserDao {
         transaction.commit();
         session.close();
         return users;
+    }
+    public Optional<User> findUserByUserName(String username){
+        Session session = sessionFactory.openSession();
+        Transaction transaction=session.beginTransaction();
+        Query<User> query = session.createNamedQuery("User.findByUserName", User.class);
+        query.setParameter("username",username);
+        Optional<User> user = query.uniqueResultOptional();
+        transaction.commit();
+        session.close();
+        return user;
     }
 
     @Override

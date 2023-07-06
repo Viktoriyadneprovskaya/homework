@@ -11,9 +11,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/users")
-public class UsersController {
+public class UsersManagementController {
     private final UserService userService;
-    public UsersController(UserService userService) {
+    public UsersManagementController(UserService userService) {
         this.userService = userService;
     }
 
@@ -47,7 +47,7 @@ public class UsersController {
                 .address(user.getAddress())
                 .phoneNumber(user.getPhoneNumber())
                 .build();
-        userService.updateUserById(user.getId(), command);
+        userService.updateUserById(user.getUser_id(), command);
         return "redirect:/users";
     }
 }

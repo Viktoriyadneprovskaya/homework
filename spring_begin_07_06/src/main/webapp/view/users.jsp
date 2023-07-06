@@ -11,6 +11,7 @@
     <title>Table of registered users</title>
 </head>
 <body>
+<a href="/logout">Logout button</a>
 <div class="wrapper">
     <div class="modal" id="modal">
         <div class="modal-form">
@@ -24,10 +25,10 @@
                     <input type="text" name="password" id="password-input" class="edge" placeholder="Password"
                            onblur="passwordValidation()" required>
                     <span class="error" id="error-password">Password</span>
-                    <input type="text" name="firstname" id="firstname-input" class="edge" placeholder="First name"
+                    <input type="text" name="firstName" id="firstname-input" class="edge" placeholder="First name"
                            onblur="firstNameValidation()" required>
                     <span class="error" id="error-firstname">Firstname shouldn't be empty and should contain only characters</span>
-                    <input type="text" name="lastname" id="lastname-input" class="edge" placeholder="Last name"
+                    <input type="text" name="lastName" id="lastname-input" class="edge" placeholder="Last name"
                            onblur="lastNameValidation()" required>
                     <span class="error" id="error-lastname">Lastname shouldn't be empty and should contain only characters</span>
                     <input type="text" name="email" id="email-input" class="edge" placeholder="Email"
@@ -36,10 +37,10 @@
                     <input type="text" name="address" id="address-input" class="edge" placeholder="Address"
                            onblur="addressValidation()" required>
                     <span class="error" id="error-address">Address shouldn't be empty</span>
-                    <input type="text" name="phonenumber" id="phone-input" class="edge" placeholder="Phonenumber"
+                    <input type="text" name="phoneNumber" id="phone-input" class="edge" placeholder="Phonenumber"
                            onblur="phoneValidation()" required>
                     <span class="error" id="error-phone">Phonenumber should contain only numbers</span>
-                    <input type="date" name="birthdate" id="birthday-input" class="edge" placeholder="Birthdate"
+                    <input type="date" name="date" id="birthday-input" class="edge" placeholder="Birthdate"
                            onblur="birthdayValidation()" required>
                     <span class="error" id="error-birthday">Birthday is not valid</span>
                     <button type="submit" class="btn btn-light edge">Save</button>
@@ -54,7 +55,7 @@
             <h2 class="title">Update existing user</h2>
             <form action="users/update" method="post">
                 <div class="aline-form">
-                    <input type="text" id="edit-id" name="id" value="${id !=null ? id : ''}" hidden>
+                    <input type="text" id="edit-id" name="user_id" value="${user_id !=null ? user_id : ''}" hidden>
                     <input type="text" name="username" id="username-edit-input"
                            value="${username  !=null ? username : ''}" class="edge"
                            placeholder="Username"
@@ -63,14 +64,14 @@
 <%--                    <span class="error" id="error-username">Username is not valid, enter at least 4 symbols</span>--%>
                     <span class="error ${errors['username'] != null ? 's-visible' : ''}" id="error-edit-username">Username is not valid, enter at least 4 symbols</span>
                     <input type="text" name="firstName" id="firstname-edit-input"
-                           value="${firstname !=null ? firstname : ''}" class="edge"
+                           value="${firstName !=null ? firstName : ''}" class="edge"
                            placeholder="First name"
 <%--                           onblur="firstNameValidation()"--%>
                            required>
 <%--                    <span class="error" id="error-lastname">Lastname shouldn't be empty and should contain only characters</span>--%>
                     <span class="error ${errors['firstname'] != null ? 's-visible' : ''}" id="error-edit-firstname">Firstname shouldn't be empty and should contain only characters</span>
                     <input type="text" name="lastName" id="lastname-edit-input"
-                           value="${lastname  !=null ? lastname : ''}" class="edge"
+                           value="${lastName  !=null ? lastName : ''}" class="edge"
                            placeholder="Last name"
 <%--                           onblur="lastNameValidation()"--%>
                            required>
@@ -91,7 +92,7 @@
 <%--                    <span class="error" id="error-address">Address shouldn't be empty</span>--%>
                     <span class="error ${errors['address'] != null ? 's-visible' : ''}" id="error-edit-address">Address shouldn't be empty</span>
                     <input type="text" name="phonenumber" id="phone-edit-input"
-                           value="${phonenumber  !=null ? phonenumber : ''}" class="edge"
+                           value="${phoneNumber  !=null ? phoneNumber : ''}" class="edge"
                            placeholder="Phonenumber"
                            onblur="phoneValidation()"
                            required>
@@ -140,11 +141,11 @@
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-primary edit-btn"
-                                onclick="openEditModal('${user.id}', '${user.username}', '${user.firstName}', '${user.lastName}', '${user.email}','${user.phoneNumber}','${user.date}', '${user.address}')">
+                                onclick="openEditModal('${user.user_id}', '${user.username}', '${user.firstName}', '${user.lastName}', '${user.email}','${user.phoneNumber}','${user.date}', '${user.address}')">
                             <i class="bi bi-pen"></i>
                         </button>
                         <button type="button" class="btn btn-primary delete-btn">
-                            <a href="users/delete?id=${user.id}">
+                            <a href="users/delete?id=${user.user_id}">
                                 <i class="bi bi-trash"></i></a>
                         </button>
                     </div>

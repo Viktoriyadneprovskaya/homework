@@ -17,7 +17,6 @@ add_close_span.onclick = function () {
     const error_firstname = document.getElementById('error-firstname')
     error_firstname.classList.remove('s-visible')
     const error_lastname = document.getElementById('error-lastname')
-
     error_lastname.classList.remove('s-visible')
     const error_email = document.getElementById('error-email')
     error_email.classList.remove('s-visible')
@@ -26,13 +25,13 @@ add_close_span.onclick = function () {
     const error_phone = document.getElementById('error-phone')
     error_phone.classList.remove('s-visible')
     // and date
-    document.getElementById('username-input').value = ''
-    document.getElementById('firstname-input').value = ''
-    document.getElementById('lastname-input').value = ''
-    document.getElementById('email-input').value = ''
-    document.getElementById('address-input').value = ''
-    document.getElementById('phone-input').value = ''
-    //document.getElementById('birthday-input').value = ''
+    // document.getElementById('username-input').value = ''
+    // document.getElementById('firstname-input').value = ''
+    // document.getElementById('lastname-input').value = ''
+    // document.getElementById('email-input').value = ''
+    // document.getElementById('address-input').value = ''
+    // document.getElementById('phone-input').value = ''
+    // //document.getElementById('birthday-input').value = ''
 }
 
 edit_close_span.onclick = function () {
@@ -92,7 +91,7 @@ function passwordValidation() {
 
 function firstNameValidation() {
     const error = document.getElementById('error-firstname')
-    const input_value = document.getElementById('first-input').value
+    const input_value = document.getElementById('firstname-input').value
     const pattern = /[a-zA-Z]+/
     if (!pattern.test(input_value)) {
         error.classList.add('s-visible')

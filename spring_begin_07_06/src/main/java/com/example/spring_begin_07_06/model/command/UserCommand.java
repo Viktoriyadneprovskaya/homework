@@ -22,7 +22,6 @@ import java.util.List;
 @Builder
 public class UserCommand {
     private Long id;
-    private int number;
     private String username;
     private String lastName;
     private String firstName;
@@ -31,26 +30,5 @@ public class UserCommand {
     private String phoneNumber;
     private String address;
 
-    public static UserCommand userToCommand(User user) {
-        return UserCommand.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .phoneNumber(user.getPhoneNumber())
-                .address(user.getAddress())
-                .date(user.getDate())
-                .build();
-    }
 
-    public static List<UserCommand> usersToCommand(List<User> users) {
-        List<UserCommand> userCommand = new ArrayList<>();
-        for (int i = 0; i < users.size(); i++) {
-            UserCommand command = userToCommand(users.get(i));
-            command.setNumber(i + 1);
-            userCommand.add(command);
-        }
-        return userCommand;
-    }
 }
