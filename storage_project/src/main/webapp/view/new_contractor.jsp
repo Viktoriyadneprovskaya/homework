@@ -40,6 +40,17 @@
             <div class="btn-group aline">
                 <button class="btn btn-secondary btn-lg dropdown-toggle strech" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
+                    CREATE DOCUMENT
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="new_document?invoice_type=2">Input document</a></li>
+                    <li><a class="dropdown-item" href="new_document?invoice_type=1">Output document</a></li>
+                    <li><a class="dropdown-item" href="new_document?invoice_type=3">Write-off document</a></li>
+                </ul>
+            </div>
+            <div class="btn-group aline">
+                <button class="btn btn-secondary btn-lg dropdown-toggle strech" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                     PRODUCT MOVEMENT
                 </button>
                 <ul class="dropdown-menu">
@@ -109,7 +120,6 @@
                     <div>Code:</div>
                     <div>
                         <input type="text" class="doc-input" name="code" id="code-input" required>
-<%--                        onclick="this.value=''"--%>
                     </div>
                     <div>Contractor name:</div>
                     <div>
@@ -121,23 +131,19 @@
                     </div>
                     <div>Contractor type</div>
                     <div>
-<%--                        <form  action="new_contractor" method="post">--%>
                             <select class="doc-input" name="contractorType" required>
                                 <c:forEach items="${contractorTypes}" var="contractorType">
                                     <option value="${contractorType.contractorTypeID}">${contractorType.contractorType}</option>
                                 </c:forEach>
                             </select>
-<%--                        </form>--%>
                     </div>
                     <div>Price type</div>
                     <div>
-<%--                        <form action="new_contractor/save" method="post">--%>
                             <select class="doc-input" name="priceType" required>
                                 <c:forEach items="${priceTypes}" var="priceType">
                                     <option value="${priceType.priceTypeId}">${priceType.priceType}</option>
                                 </c:forEach>
                             </select>
-<%--                        </form>--%>
                     </div>
                     <div>Country</div>
                     <div>

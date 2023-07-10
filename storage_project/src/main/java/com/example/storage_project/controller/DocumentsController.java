@@ -1,5 +1,7 @@
 package com.example.storage_project.controller;
 
+import com.example.storage_project.model.Address;
+import com.example.storage_project.model.Contractors;
 import com.example.storage_project.model.Document;
 import com.example.storage_project.model.DocumentDetails;
 import com.example.storage_project.service.DocDetailsService;
@@ -30,12 +32,5 @@ public class DocumentsController {
         model.addAttribute("documents", documents);
         return "documents";
     }
-    @GetMapping("/{id_document}")
-    public String getAllDocDetailsByDocumentId(Model model, @PathVariable Long id_document) {
-        Document document = documentsService.getDocumentById(id_document);
-        List<DocumentDetails> documentDetails = docDetailsService.getAllDocDetailsByDocumentId(id_document);
-        model.addAttribute("document",document);
-        model.addAttribute("doc_details",documentDetails);
-        return "/entire_document";
+
     }
-}
